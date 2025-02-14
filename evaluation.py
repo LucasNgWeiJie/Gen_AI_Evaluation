@@ -75,7 +75,7 @@ def evaluate_loss_perplexity(model_name: str,
     del dataset
     torch.cuda.empty_cache()
     gc.collect()
-    return avg_loss, perplexity
+    return avg_loss, perplexity, time_taken
 
 
 def evaluate_time(model_name: str,
@@ -259,7 +259,7 @@ def count_correct_assert_statements(model_name: str,
     end_time = time.time()
     time_taken = end_time - start_time
     print(f"Assert statements counted for {model_name} in {time_taken} seconds")
-    return count_correct
+    return count_correct, time_taken
 
 def evaluate_rouge(model_name: str,
                     dataset: str | (DatasetDict |
@@ -307,4 +307,4 @@ def evaluate_rouge(model_name: str,
     time_taken = end_time - start_time
     print(f"All rouge scores computed for {model_name} in {time_taken} seconds")
 
-    return rouge1, rouge2, rougeL, rougeLsum
+    return rouge1, rouge2, rougeL, rougeLsum, time_taken

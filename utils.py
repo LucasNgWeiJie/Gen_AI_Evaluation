@@ -45,27 +45,27 @@ def evaluate_all_perplexity_loss(data, is_finetuned: str):
     pretrained_losses = []
     finetuned_perplexities = []
     pretrained_perplexities = []
-    # finetuned_times = []
-    # pretrained_times = []
+    finetuned_times = []
+    pretrained_times = []
 
     if is_finetuned == "finetuned":
         # Calculates loss/perplexity for finetuned model
         for model in MODELS:
-            finetuned_avg_loss, finetuned_perplexity = evaluate_loss_perplexity(model, data, True, PREFIX)
+            finetuned_avg_loss, finetuned_perplexity, finetuned_time = evaluate_loss_perplexity(model, data, True, PREFIX)
             finetuned_losses.append(finetuned_avg_loss)
             finetuned_perplexities.append(finetuned_perplexity)
+            finetuned_times.append(finetuned_time)
         print(f"Perplexity Evaluation done\n Plotting graphs for finetuned models...")
         # plot graph
-        plot_metrics_line(FINETUNED_MODELS,
-                          finetuned_losses,
-                          finetuned_perplexities,
-                          GRAPH_FILENAME_PREFIX
-                          + 'perplexity_loss_finetuned_metrics_line.png')
         plot_metrics_bar(FINETUNED_MODELS,
                          finetuned_losses,
                          finetuned_perplexities,
                          GRAPH_FILENAME_PREFIX
                          + 'perplexity_loss_finetuned_metrics_bar.png')
+        plot_metrics_single(FINETUNED_MODELS,
+                            'Time for loss/perplexity calculation',
+                            finetuned_times,
+                            GRAPH_FILENAME_PREFIX + 'finetuned_lp_time_metrics.png')
     elif is_finetuned == "pretrained":
         # Calculates loss/perplexity for pretrained model
         for model in MODELS:
@@ -74,16 +74,15 @@ def evaluate_all_perplexity_loss(data, is_finetuned: str):
             pretrained_perplexities.append(pretrained_perplexity)
         # plot graph
         print(f"Perplexity Evaluation done\n Plotting graphs for pretrained models...")
-        plot_metrics_line(BASE_MODELS,
-                          pretrained_losses,
-                          pretrained_perplexities,
-                          GRAPH_FILENAME_PREFIX
-                          + 'perplexity_loss_base_metrics_line.png')
         plot_metrics_bar(BASE_MODELS,
                          pretrained_losses,
                          pretrained_perplexities,
                          GRAPH_FILENAME_PREFIX
                          + 'perplexity_loss_base_metrics_bar.png')
+        plot_metrics_single(BASE_MODELS,    
+                            'Time for loss/perplexity calculation',
+                            pretrained_times,
+                            GRAPH_FILENAME_PREFIX + 'pretrained_lp_time_metrics.png')
     else:
         for model in MODELS:
             pretrained_avg_loss, pretrained_perplexity = evaluate_loss_perplexity(model, data, False, PREFIX)
@@ -101,6 +100,7 @@ def evaluate_all_perplexity_loss(data, is_finetuned: str):
                         both_losses,
                         both_perplexities,
                         GRAPH_FILENAME_PREFIX + "both_perplexity_loss_metrics_bar.png")
+    
         
 
 
@@ -210,35 +210,22 @@ def evaluate_all_rouge(data, is_finetuned: str):
 
     # calculate for finetuned AND non pretrained
    
-    # Plot graph for rouge score
-    if is_finetuned == "finetuned":
-        for model in MODELS:
+    # Plot graph for rouge score    
+    for model in MODELS:
+        if is_finetuned == "finetuned":
             ft_r1, ft_r2, ft_rl, ft_rlsum = evaluate_rouge(model, data, True)
             finetuned_rouge1.append(ft_r1)
             finetuned_rouge2.append(ft_r2)
             finetuned_rougeL.append(ft_rl)
             finetuned_rougeLsum.append(ft_rlsum)
-        # plot any of the 4 rouge score graphs for finetuned (edit the arguments)
-        print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
-        plot_metrics_single(FINETUNED_MODELS,
-                            "Finetuned Rouge LCS",
-                            finetuned_rougeL,
-                            GRAPH_FILENAME_PREFIX + 'finetuned_rougeLCS.png')
-    elif is_finetuned == "pretrained":
-        for model in MODELS:
+        elif is_finetuned == "pretrained":
             pt_r1, pt_r2, pt_rl, pt_rlsum = evaluate_rouge(model, data, False)
             pretrained_rouge1.append(pt_r1)
             pretrained_rouge2.append(pt_r2)
             pretrained_rougeL.append(pt_rl)
             pretrained_rougeLsum.append(pt_rlsum)
-        # plot any of the 4 rouge score graphs for pretrained (edit the arguments)
-        print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
-        plot_metrics_single(BASE_MODELS,
-                            "Pretrained Rouge LCS",
-                            pretrained_rougeL,
-                            GRAPH_FILENAME_PREFIX + 'pretrained_rougeLCS.png')
-    else:
-        for model in MODELS:
+
+        else:
             ft_r1, ft_r2, ft_rl, ft_rlsum = evaluate_rouge(model, data, True)
             finetuned_rouge1.append(ft_r1)
             finetuned_rouge2.append(ft_r2)
@@ -250,14 +237,14 @@ def evaluate_all_rouge(data, is_finetuned: str):
             pretrained_rouge2.append(pt_r2)
             pretrained_rougeL.append(pt_rl)
             pretrained_rougeLsum.append(pt_rlsum)
-        # plot both
-        print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
-        both_models = BASE_MODELS + FINETUNED_MODELS
-        both_rougeL = pretrained_rougeL + finetuned_rougeL
-        plot_metrics_single(both_models,
-                            "Comparison Rouge LCS",
-                            both_rougeL,
-                            GRAPH_FILENAME_PREFIX + 'both_rougeLCS.png')
+    # plot both
+    print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
+    both_models = BASE_MODELS + FINETUNED_MODELS
+    both_rougeL = pretrained_rougeL + finetuned_rougeL
+    plot_metrics_single(both_models,
+                        "Comparison Rouge LCS",
+                        both_rougeL,
+                        GRAPH_FILENAME_PREFIX + 'both_rougeLCS.png')
     
 
 def eval_suite(dataset_filename: str, is_finetuned: str):
