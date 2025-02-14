@@ -1,0 +1,22 @@
+[
+    {
+        "prompt": "What is the objective of the `TAG_FILE_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : File List tag = 0x12"
+    },
+    {
+        "prompt": "What is the `IDX_REFRESH_eUICC_PROFILE_OPERATION` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Support of eUICC Profile Operation = (short)271;"
+    },
+    {
+        "prompt": "State the goal of the `findAndCompareValue(byte, byte[], short)` method of the `ViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Looks for the first occurrence of a TLV element from beginning of a TLV list and compare its value with a buffer. If no TLV element is found, the `UNAVAILABLE_ELEMENT` exception is thrown. If the method is successful then the corresponding TLV becomes current, else no TLV is selected. This search method is Comprehension Required flag independent.\n\nReturns: the result of the comparison as follows:\n- `0` if identical\n- `-1` if the first miscomparing byte in Comprehension TLV is less than that in `compareBuffer`,\n- `1` if the first miscomparing byte in Comprehension TLV is greater than that in `compareBuffer`.\n\nThrows:\n- `java.lang.NullPointerException` - if `compareBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `compareOffset` would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_TIMER_VALUE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Timer Value tag = 0x25"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_GET_INKEY_HELP_SUPPORTED` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Proactive UICC Get Inkey Help Supported index = 137"
+    }
+]
