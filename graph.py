@@ -79,18 +79,18 @@ def plot_metrics_single(model_names,
     
     # Customize the x-axis and y-axis labels
     ax1.set_xlabel('Models', fontsize=14)
-    ax1.set_ylabel(f'{metric_type} Score', fontsize=14, color=color)
+    ax1.set_ylabel(f'{metric_type}', fontsize=14, color=color)
     ax1.tick_params(axis='x', labelrotation=45, labelsize=12)
     ax1.tick_params(axis='y', labelcolor=color, labelsize=12)
 
     # Set title with improved styling
-    plt.title(f'Model Comparison: {metric_type} Scores', fontsize=16, fontweight='bold')
+    plt.title(f'{metric_type}', fontsize=16, fontweight='bold')
 
     # Add gridlines for better readability
     ax1.grid(axis='y', linestyle='--', alpha=0.6)
 
     # Set the font size for the legend
-    ax1.legend([f'{metric_type} Scores'], loc='upper left', bbox_to_anchor=(0.1, -0.15), fontsize=12, title=metric_type, title_fontsize=13)
+    ax1.legend([f'{metric_type}'], loc='upper left', bbox_to_anchor=(0.1, -0.15), fontsize=12, title=metric_type, title_fontsize=13)
 
     # Tighten layout to ensure nothing is cut off
     fig.tight_layout()

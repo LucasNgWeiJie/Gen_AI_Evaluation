@@ -1,0 +1,2002 @@
+[
+    {
+        "prompt": "What is the function of the `DEV_ID_NETWORK` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Device Identity : Network = 0x83"
+    },
+    {
+        "prompt": "State the goal of the `TAG_IMEISV` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: IMEISV = 0x62"
+    },
+    {
+        "prompt": "State the goal of the `TAG_BEARER_DESCRIPTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Bearer Description Tag = 0x35"
+    },
+    {
+        "prompt": "State the significance of the `RES_ERROR_CMD_TYP_NOT_UNDERSTOOD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : command type not understood by terminal = 0x31"
+    },
+    {
+        "prompt": "State the goal of the `MAX_VALUE_REACHED` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (= 12) is used to indicate that method increase can not be performed as the maximum value of the record is reached."
+    },
+    {
+        "prompt": "What is the objective of the `TAG_SERVICE_RECORD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Service Record = 0x41"
+    },
+    {
+        "prompt": "What is the function of the `REC_ACC_MODE_CURRENT` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "Record access mode: CURRENT = 0x04"
+    },
+    {
+        "prompt": "State the purpose of the `BTAG_PROACTIVE_UICC_COMMAND` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "BER-TLV : Proactive UICC command tag = 0xD0"
+    },
+    {
+        "prompt": "State the purpose of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_ACCESS_TECHNOLOGY` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Provide Local Information Access Technology index = 71"
+    },
+    {
+        "prompt": "Explain the role of the `buildTLVHandler(byte, short, byte[], short, short)` method of the `HandlerBuilder` class in the `uicc.system` package.",
+        "completion": "Allocates a TLVHandler with an internal buffer of length capacity. Copies the buffer content to an internal buffer of the TLVHandler starting at `offset`. The internal buffer shall be at least `length` long.\n\nReturns: a `ViewHandler` object\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `ILLEGAL_VALUE` \n- if the type does not match with the predefined values\n- if `capacity` is negative\n- `NO_RESOURCE` if there are not enough resources in the card to allocate the handler\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` -\n- if `offset` would cause access outside array bounds, or if `length` is negative.\n- if `offset+length` is greater than the length of the buffer\n- `ToolkitException` - with the following reason code:\n- `BAD_INPUT_PARAMETER` if `length` is greater than `capacity`"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_CARD_READER_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Card Reader status tag = 0x20"
+    },
+    {
+        "prompt": "State the goal of the `TAG_UICC_TERMINAL_TRANSPORT_LEVEL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : UICC/Terminal interface transport level = 0x3C"
+    },
+    {
+        "prompt": "What does the `TAG_ESN` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV : ESN tag = 0x46"
+    },
+    {
+        "prompt": "Explain the role of the `EVENT_MENU_SELECTION_HELP_REQUEST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Menu Selection Help Request = 8"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_PROVISION_REFERENCE_FILE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Provisioning Reference File Tag = 0x33"
+    },
+    {
+        "prompt": "What is the `secondsToTime(byte[], short, short)` method of the `SuspendUtil` class in the `uicc.suspendresume` package intended for?",
+        "completion": "This method converts the time encoded in the byte array `bArray` in seconds provided as an unsigned integer to the `short` value which is composed of the concatenation of `TimeUnit` and `TimeValue`.\nThe `TimeUnit` needed for the UICC SUSPEND command, is encoded in seconds, minutes, hours, days and ten days indicating the duration of suspension.\nThe value in the array shall be big endian encoded, i.e. with the MSB byte in `bOff` and the LSB byte in `bOff+bLen-1` where the value of `bLen` is between 1 to 4.\nThe method `secondsToTime` converts the suspension time given in seconds to the most appropriate value and unit.\n\nThe strategy for the conversion work as follows:\n- Use the smallest possible `TimeUnit` in order to achieve the best possible resolution,\n- The value of `TimeValue` in the resulting unit should be chosen to minimize the inaccuracy with the value provided as input in seconds, however, the method to minimize this inaccuracy is implementation dependent.\n- Upon switching to the next higher `TimeUnit` the `TimeValue` in seconds from which the next `TimeUnit` is used is determined in such a way that the resulting inaccuracy from the conversion is miminized: as a result values of 256 to 277 seconds are encoded as 255 seconds while 278 seconds and up are encoded in 5 minutes and higher, ...\nFor details see the following table:\n`TimeUnit` selectionInput range in secondsOutput UnitOutput rangeMinimumMaximumMinimumMaximumDecHexDecHexDecHexDecHex `0` `0x00` `277` `0x0115` `TIME_UNIT_SECONDS` `0` `0x00` `255` `0xFF` `278` `0x116` `16650` `0x410A` `TIME_UNIT_MINUTES` `5` `0x05` `255` `0xFF` `16651` `0x410B` `934200` `0x0E4138` `TIME_UNIT_HOURS` `5` `0x05` `255` `0xFF` `934201` `0x0E4139` `22248000` `0x01537A40` `TIME_UNIT_DAYS` `11` `0x0B` `255` `0xFF` `22248001` `0x01537A41` `221183999` `0x0D2EFFFF` `TIME_UNIT_TEN_DAYS` `26` `0x1A` `255` `0xFF`\n\nReturns: Encoded Time as:\n- In MSB byte: the time unit selected from the predefined constants `TIME_UNIT_XXX` in ` `SuspendConstants` ` interface\n- In LSB byte: the maximum acceptable time value as an unsigned byte.\n\nThrows:\n- `SuspendException` - with the reason code `UNEXPECTED_OVERFLOW` if the provided value in seconds is above the maximum available (221183999 or 0x0D2EFFFF seconds corresponding to 256 times ten days minus 1 second).\n- `java.lang.ArrayIndexOutOfBoundsException` - if the `bOff` parameter is negative or if `bOff+bLen` is greater than the length of `bArray`\n- `java.lang.NullPointerException` - if the `bArray` parameter is `null`"
+    },
+    {
+        "prompt": "What is the function of the `clear()` method of the `EditHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Clears the TLV list of an EditHandler and resets the current TLV selected.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "What is the function of the `TAG_FCP_FILE_SIZE` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "Tag in FCP TLV structure: File Size = 0x80"
+    },
+    {
+        "prompt": "What is the function of the `TAG_DURATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Duration tag = 0x04"
+    },
+    {
+        "prompt": "What is the `IDX_TEXT_ATTRIBUTE` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Text Attribute index = 123"
+    },
+    {
+        "prompt": "Explain the role of the `EnvelopeResponseHandler` interface in the `uicc.toolkit` package.",
+        "completion": "The `EnvelopeResponseHandler` interface contains basic methods to handle theEnvelope responsedata field. This class will be used by the Toolkit Applet in order to edit the response to current Envelope command. A class implementing the `EnvelopeResponseHandler` interface is aTemporary JCRE Entry Point Object. The only way to get an `EnvelopeResponseHandler` reference is through the static `getTheHandler()` method of the `EvelopeResponseHandlerSystem` class."
+    },
+    {
+        "prompt": "What is the objective of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This class extends the `Throwable` class and allows the classes of this package to throw specific exceptions in case of problems."
+    },
+    {
+        "prompt": "What is the function of the `DEV_ID_ADDITIONAL_CARD_READER_4` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Device Identity : Additional Card Reader 4 = 0x14"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROACTIVE_UICC_DISPLAY_TEXT_VARIABLE_TIMEOUT` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Display Text Variable Timeout index = 136"
+    },
+    {
+        "prompt": "State the goal of the `EnvelopeHandlerSystem` class in the `uicc.toolkit` package.",
+        "completion": "The `EnvelopeHandlerSystem` class provides the means to retrieve an instance of an Object implementing the `EnvelopeHandler` interface."
+    },
+    {
+        "prompt": "What is the objective of the `TAG_NETWORK_MEASUREMENT_RESULTS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Network Measurement Results tag = 0x16"
+    },
+    {
+        "prompt": "What is the objective of the `FILE_ALREADY_EXISTS` field of the `AdminException` exception in the `uicc.access.fileadministration` package?",
+        "completion": "This reason code (=2) is used to indicate that the file already exists."
+    },
+    {
+        "prompt": "What is the `IDX_MULTIPLE_ACCESS_TECHNOLOGIES_SUPPORT` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Support: Multiple access technologies = 199"
+    },
+    {
+        "prompt": "What does the `PRO_CMD_DECLARE_SERVICE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Type of proactive command : Declare Service = 0x47"
+    },
+    {
+        "prompt": "What is the objective of the `initGetInkey(byte, byte, byte[], short, short)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Builds a Get Inkey Proactive command without sending the command. The Comprehension Required flags are all set to 1. After the method invocation no TLV is selected.\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `offset` or `length` or both would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the ProactiveHandler buffer is to small to put the requested data"
+    },
+    {
+        "prompt": "What is the objective of the `DEV_ID_CHANNEL_BASE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Device identity : Base Channel = 0x20"
+    },
+    {
+        "prompt": "State the goal of the `TAG_ADDITIONAL_INTERFACE_SUPPORT` field of the `TerminalCapabilityHandler` class in the `uicc.system` package.",
+        "completion": "Additional interface support tag = 0x82"
+    },
+    {
+        "prompt": "What is the function of the `PRO_CMD_POWER_OFF_CARD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Type of proactive command : POWER OFF CARD = 0x32"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_PROACTIVE_UICC_GET_INKEY_VARIABLE_TIMEOUT` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Get Inkey Variable Timeout index = 139"
+    },
+    {
+        "prompt": "What does the `RES_ERROR_MULTIPLE_CARD_ERROR` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "General Result : Multiple card command error = 0x38"
+    },
+    {
+        "prompt": "What is the function of the `IDX_SCREEN_SIZING` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Screen Sizing index = 111"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROVIDE_LOCAL_INFORMATION_ESN` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Provide Local Information ESN index = 140"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_REFRESH_ENFORCEMENT_POLICY` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Support of refresh enforcement policy = 255"
+    },
+    {
+        "prompt": "What is the `IDX_RS232` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "RS232 index = 100"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROACTIVE_UICC_DECLARE_SERVICE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Declare Service index = 95"
+    },
+    {
+        "prompt": "Explain the role of the `EVENT_EVENT_POLL_INTERVAL_NEGOTIATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event: Poll Interval Negotiation = 36"
+    },
+    {
+        "prompt": "What is the `DEV_ID_ADDITIONAL_CARD_READER_0` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Device Identity : Additional Card Reader 0 = 0x10"
+    },
+    {
+        "prompt": "What is the objective of the `getValue(short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Returns the binary value of a parameter, delimited by two indexes, from the handset profile.\n\nReturns: binary value of the data field indicated in the handset profile. The `indexLSB` bit in the TerminalProfile data is the Lowest Significant bit in the short returned value. If padding is necessary, the returned value is left padded with 0. The values outside the TerminalProfile data available are considered to bet set to 0. The return value is according to the following example:\n- If `indexMSB` =108 and `indexLSB` =104, the return value is the number of characters down the Terminal display.\n- If `indexMSB` =31 and `indexLSB` =16, the return value is a short built from the 4th and 3rd byte of the handset profile with the 4th byte as the Most significant byte.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available\n- BAD_INPUT_PARAMETER if `(indexMSB >= indexLSB +16)` or `(indexMSB < indexLSB)` or `(indexMSB < 0)` or `(indexLSB < 0)`"
+    },
+    {
+        "prompt": "What does the `PRO_CMD_MORE_TIME` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Type of proactive command : MORE TIME = 0x02"
+    },
+    {
+        "prompt": "What does the `TAG_SA_TEMPLATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV: SA template = 0x23"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_AT_COMMAND` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : AT Command tag = 0x28"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_FCP_PIN_STATUS_TEMPLATE_DO` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "Tag in FCP TLV structure: PIN Status Template DO = 0xC6"
+    },
+    {
+        "prompt": "What is the `deregisterFileEvent(short, FileView)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Deregister a ToolkitRegistry object from the `EVENT_EXTERNAL_FILE_UPDATE` for a file.\n\nThrows:\n- `java.lang.NullPointerException` - if `aFileView` is `null`\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded\n- `ToolkitException` - with the following reason code:\n- `EVENT_NOT_ALLOWED` if the event is one of the following events: EVENT_MENU_SELECTION, EVENT_MENU_SELECTION_HELP_REQUEST, EVENT_TIMER_EXPIRATION, EVENT_STATUS_COMMAND\n- `EVENT_NOT_SUPPORTED` if the event is not one of the following event: EVENT_EXTERNAL_FILE_UPDATE, EVENT_REMOTE_FILE_UPDATE.\n- `UICCException` - in case of error\n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_MCC_MNC_LAC_CELLID_IMEI` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Proactive Local Information MSS,MNC,LAC,CELLID,IMEI index = 30"
+    },
+    {
+        "prompt": "Explain the role of the `COMPARE_IS_HIGHER` field of the `SuspendConstants` interface in the `uicc.suspendresume` package.",
+        "completion": "Compare time is higher = 3"
+    },
+    {
+        "prompt": "What does the `REFERENCED_DATA_NOT_FOUND` field of the `UICCException` exception in the `uicc.access` package serve to accomplish?",
+        "completion": "This reason code (=15) is used to indicate to the calling applet that the referenced data cannot be found."
+    },
+    {
+        "prompt": "State the goal of the `BTAG_MENU_SELECTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "BER-TLV : Menu Selection tag = 0xD3"
+    },
+    {
+        "prompt": "What does the `TAG_OTHER_DATA_DESTINATION_ADDRESS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : Other address (data destination address) = 0x3E"
+    },
+    {
+        "prompt": "Explain the role of the `PRO_CMD_GET_INPUT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : GET INPUT = 0x23"
+    },
+    {
+        "prompt": "What does the `PRO_CMD_PERFORM_CARD_APDU` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Type of proactive command : PERFORM CARD APDU = 0x30"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_ACCESS_TECHNOLOGY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Access Technology Tag = 0x3F"
+    },
+    {
+        "prompt": "What does the `TIME_UNIT_TEN_DAYS` field of the `SuspendConstants` interface in the `uicc.suspendresume` package help to achieve?",
+        "completion": "Time Unit : 10 days = 4"
+    },
+    {
+        "prompt": "What does the `EVENT_EVENT_DOWNLOAD_NETWORK_SEARCH_MODE_CHANGE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event: Event Network Search Mode Change = 28"
+    },
+    {
+        "prompt": "Explain the role of the `PRO_CMD_TIMER_MANAGEMENT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : TIMER MANAGEMENT = 0x27"
+    },
+    {
+        "prompt": "What is the `EVENT_EVENT_DOWNLOAD_DISPLAY_PARAMETER_CHANGED` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Event : Event Download - Display Parameter Change type = 26"
+    },
+    {
+        "prompt": "What is the `TAG_TEXT_ATTRIBUTE_TAG` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV: Text attribute tag = 0x50"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_CLOSE_CHANNEL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Type of proactive command : Close Channel = 0x41"
+    },
+    {
+        "prompt": "State the goal of the `OUT_OF_DATA_BOUNDARIES` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (=16) is used to indicate to the calling applet that the length passed to the called method is out of the data boundaries."
+    },
+    {
+        "prompt": "What is the `ALLOWED_LENGTH_EXCEEDED` field of the `ToolkitException` exception in the `uicc.toolkit` package intended for?",
+        "completion": "This reason code (=10) is used to indicate that the provided menu entry string is bigger than the allocated space"
+    },
+    {
+        "prompt": "What is the `copy(short, byte[], short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Copies a part of the handset profile in a buffer. The values outside the TerminalProfile data available are considered to bet set to 0.\n\nNotes:\n- If `dstOffset` or `dstLength` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown and no copy is performed.\n- If `dstOffset+dstLength` is greater than `dstBuffer.length`, the length of the `dstBuffer` array an `ArrayIndexOutOfBoundsException` exception is thrown and no copy is performed.\n\nReturns: dstOffset + dstLength\n\nThrows:\n- `java.lang.ArrayIndexOutOfBoundsException` - if copy would cause access of data outside array bounds\n- `java.lang.NullPointerException` - if `dstBuffer` is null\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available\n- BAD_INPUT_PARAMETER if the `startOffset` is negative"
+    },
+    {
+        "prompt": "What is the `EVENT_EVENT_DOWNLOAD_CONTACTLESS_STATE_REQUEST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Event: Contactless State Request = 35"
+    },
+    {
+        "prompt": "What is the `SuspendMechanism` interface in the `uicc.suspendresume` package used for?",
+        "completion": "Provides callbacks to applet to behave with suspension mechanism. The interface `uicc.suspendresume.SuspendMechanism` provides a callback interface for applets to be notified by the UICC Runtime Environment about suspension operations. An applet Class (which extends the `javacard.framework.Applet` class) must implement this interface if their instances needs to be involved for suspension and resume operations."
+    },
+    {
+        "prompt": "State the purpose of the `IDX_EVENT_DISPLAY_PARAMETER_CHANGED` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Event Display Parameter Change index = 45"
+    },
+    {
+        "prompt": "State the goal of the `TAG_IMEI` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : IMEI tag = 0x14"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_REFRESH_APPLICATION_UPDATE` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Support for Refresh with \"Application Update\" mode (i.e. class \"af\" is supported)=(short)275;"
+    },
+    {
+        "prompt": "What is the function of the `FID_EF_FDN` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : EF FDN = 0x6F3B (under DF TELECOM)"
+    },
+    {
+        "prompt": "Explain the role of the `increase(byte[], short, short, byte[], short)` method of the `FileView` interface in the `uicc.access` package.",
+        "completion": "This method increases the current cyclic EF record, as defined in TS 102 221.In addition to the behaviour defined in TS 102 221, the following rule applies: If the parameter incrLength is set to 0, the current value of the last increased or updated record is stored into the oldest record of the current cyclic EF. The record pointer is set to the oldest record and this record becomes record number 1. The response buffer will contain the value of the increased record.\n\nNotes:\n- If `incrOffset` or `incrLength` or `respOffset` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `incrOffset+incrLength` is greater than `increase.length`, the length of the `increase` array an `ArrayIndexOutOfBoundsException` exception is thrown and no increase is performed.\n- If `respOffset` is greater than `response.length`, the length of the `response` array a `ArrayIndexOutOfBoundsException` exception is thrown and no increase is performed.\n\nReturns: length of the valid data in the resp buffer\n\nThrows:\n- `java.lang.NullPointerException` - if `incr` or `resp` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if increasing would cause access of data outside array bounds\n- `UICCException` - in case of error\n- `NO_EF_SELECTED` \n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REF_DATA_INVALIDATED` \n- `RECORD_NOT_FOUND` \n- `MAX_VALUE_REACHED` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "What is the objective of the `initGetInput(byte, byte, byte[], short, short, short, short)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Initialize the building of a Get Input Proactive command. The Comprehension Required flags are all set to 1. The following command parameters (i.e. TLVs) may be appended to the command before sending it: Default Text. After the method invocation no TLV is selected.\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `offset` or `length` or both would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the ProactiveHandler buffer is to small to put the requested data"
+    },
+    {
+        "prompt": "What does the `TAG_eCAT_SEQUENCE_NUMBER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV: eCAT sequence number = 0x21"
+    },
+    {
+        "prompt": "State the significance of the `HIGH_UPDATE_ARRAY_MIN_UPDATE_JB` field of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package.",
+        "completion": "JX Property value : High Update Array minimum update property, value JB corresponding to 500,000 update operations. Constant = (short)2;"
+    },
+    {
+        "prompt": "What does the `IDX_PROACTIVE_UICC_GET_INKEY_VARIABLE_TIMEOUT` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Proactive UICC Get Inkey Variable Timeout index = 139"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROFILE_DOWNLOAD` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Profile Download index = 0"
+    },
+    {
+        "prompt": "Explain the role of the `BER_TLV_ACC_MODE_NEXT` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Next Block = 0x00"
+    },
+    {
+        "prompt": "What is the `TAG_REFRESH_ENFORCEMENT_POLICY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV: REFRESH Enforcement Policy tag = 0x3A"
+    },
+    {
+        "prompt": "What is the `IDX_EVENT_BROWSING_STATUS` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Event: Browsing Status = 192"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_POWER_OFF_CARD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : POWER OFF CARD = 0x32"
+    },
+    {
+        "prompt": "What does the `EVENT_MEMORY_FAILURE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event: Memory Failure = 129"
+    },
+    {
+        "prompt": "What does the `EditHandler` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "This class is the basic class for the construction of a list of Comprehension TLV elements. This class is able to handle Comprehension TLV with a value field no longer than 255 bytes."
+    },
+    {
+        "prompt": "State the purpose of the `IDX_WML_BROWSER_SUPPORTED` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "WML Browser supported = 160"
+    },
+    {
+        "prompt": "Explain the role of the `uicc.toolkit.test` package.",
+        "completion": "This package provides the means for the toolkit applets to register to test events defined for the UICC in REL-18.\nThe Package Application Identifier (AID) format is defined in TS 101 220"
+    },
+    {
+        "prompt": "State the purpose of the `DEV_ID_ADDITIONAL_CARD_READER_5` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Device Identity : Additional Card Reader 5 = 0x15"
+    },
+    {
+        "prompt": "What is the objective of the `copyTextString(byte[], short)` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Copies the text string value from the first Text String TLV element of the current response data field. The Data Coding Scheme byte is not copied. If the element is available it becomes the TLV selected, else no TLV is selected.\n\nReturns: `dstOffset` + length of the copied value\n\nThrows:\n- `java.lang.NullPointerException` - if `dstBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `dstOffset or dstOffset + (length of the TextString to be copied, without the Data Coding Scheme included)`, as specified for the returned value, would cause access outside array bounds.\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Text String TLV element"
+    },
+    {
+        "prompt": "What is the function of the `IDX_EVENT_MT_CALL` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Event MT Call index = 33"
+    },
+    {
+        "prompt": "What does the `postAsBERTLV(boolean, byte)` method of the `EnvelopeResponseHandler` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Prepare the Envelope response in a BER TLV structure. Should be used with Envelope Call Control by NAA or with an Unrecognized Envelope. The tag value is to be used to set the Result for Call Control.\n\nThrows:\n- `javacard.framework.APDUException` - with the following reason code:\n- `BAD_LENGTH` if the resulting response length is greater than 256 bytes and the response data has to be retrieved by the GET RESPONSE command.\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "What is the objective of the `secondsToTime(byte[], short, short)` method of the `SuspendUtil` class in the `uicc.suspendresume` package?",
+        "completion": "This method converts the time encoded in the byte array `bArray` in seconds provided as an unsigned integer to the `short` value which is composed of the concatenation of `TimeUnit` and `TimeValue`.\nThe `TimeUnit` needed for the UICC SUSPEND command, is encoded in seconds, minutes, hours, days and ten days indicating the duration of suspension.\nThe value in the array shall be big endian encoded, i.e. with the MSB byte in `bOff` and the LSB byte in `bOff+bLen-1` where the value of `bLen` is between 1 to 4.\nThe method `secondsToTime` converts the suspension time given in seconds to the most appropriate value and unit.\n\nThe strategy for the conversion work as follows:\n- Use the smallest possible `TimeUnit` in order to achieve the best possible resolution,\n- The value of `TimeValue` in the resulting unit should be chosen to minimize the inaccuracy with the value provided as input in seconds, however, the method to minimize this inaccuracy is implementation dependent.\n- Upon switching to the next higher `TimeUnit` the `TimeValue` in seconds from which the next `TimeUnit` is used is determined in such a way that the resulting inaccuracy from the conversion is miminized: as a result values of 256 to 277 seconds are encoded as 255 seconds while 278 seconds and up are encoded in 5 minutes and higher, ...\nFor details see the following table:\n`TimeUnit` selectionInput range in secondsOutput UnitOutput rangeMinimumMaximumMinimumMaximumDecHexDecHexDecHexDecHex `0` `0x00` `277` `0x0115` `TIME_UNIT_SECONDS` `0` `0x00` `255` `0xFF` `278` `0x116` `16650` `0x410A` `TIME_UNIT_MINUTES` `5` `0x05` `255` `0xFF` `16651` `0x410B` `934200` `0x0E4138` `TIME_UNIT_HOURS` `5` `0x05` `255` `0xFF` `934201` `0x0E4139` `22248000` `0x01537A40` `TIME_UNIT_DAYS` `11` `0x0B` `255` `0xFF` `22248001` `0x01537A41` `221183999` `0x0D2EFFFF` `TIME_UNIT_TEN_DAYS` `26` `0x1A` `255` `0xFF`\n\nReturns: Encoded Time as:\n- In MSB byte: the time unit selected from the predefined constants `TIME_UNIT_XXX` in ` `SuspendConstants` ` interface\n- In LSB byte: the maximum acceptable time value as an unsigned byte.\n\nThrows:\n- `SuspendException` - with the reason code `UNEXPECTED_OVERFLOW` if the provided value in seconds is above the maximum available (221183999 or 0x0D2EFFFF seconds corresponding to 256 times ten days minus 1 second).\n- `java.lang.ArrayIndexOutOfBoundsException` - if the `bOff` parameter is negative or if `bOff+bLen` is greater than the length of `bArray`\n- `java.lang.NullPointerException` - if the `bArray` parameter is `null`"
+    },
+    {
+        "prompt": "What does the `getTheHandler()` method of the `TerminalCapabilityHandler` class in the `uicc.system` package serve to accomplish?",
+        "completion": "Returns the single system instance of an object that implements the `BERTLVViewHandler` interface encapsulating the `Terminal capability TLV` provided by the `Terminal Capability APDU` command defined in TS 102 221[6].\n\nReturns: reference of the temporary JCRE entry point object implementing the `BERTLVViewHandler` interface that exposes Terminal Capability TLV informations\n\nThrows:\n- `UICCSystemException` - with the following reason codes:\n- `TERMINAL_CAPABILITY_NOT_AVAILABLE` if the Terminal Capability command as not been issued."
+    },
+    {
+        "prompt": "What is the objective of the `INVALID_TAG_VALUE` field of the `UICCException` exception in the `uicc.access` package?",
+        "completion": "This reason code (=18) is used to indicate to the calling applet that the TAG value is invalid."
+    },
+    {
+        "prompt": "What is the objective of the `RES_REFRESH_PERF_NO_NAA_ACTIVE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "General Result : REFRESH performed but indicated NAA was not active = 0x08"
+    },
+    {
+        "prompt": "What is the `getTheAdminFileView(byte[], short, byte, byte)` method of the `AdminFileViewBuilder` class in the `uicc.access.fileadministration` package used for?",
+        "completion": "Method to get a reference to a AdminFileView object on an ADF file system server. The AdminFileView object will only allow access to Files under the ADF specified by the AID. It is not possible to access files which are not located under the ADF. After a successful invocation of the method the ADF is the currently selected file. This method return `null` if the `Applet.register()` has not yet been invoked, or the filesystem server does not exist or the filesystem server returns `null` \n\nNotes:\n- If `bOffset` or `bLength` is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `bOffset+bLength` is greater than `buffer.length`, the length of the `buffer` array an `ArrayIndexOutOfBoundsException` exception is thrown.\n\nReturns: a reference to an object which implements the AdminFileView interface\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - in case of access outside array bounds\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if bType is not a valid value or `bLength` is not in the range of 5 - 16 bytes.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "What is the objective of the `UICCException` exception in the `uicc.access` package?",
+        "completion": "The `UICCViewException class` encapsulates specific exceptions which can be thrown by the methods of an object that implements a UICCView interface, in case of error."
+    },
+    {
+        "prompt": "State the purpose of the `HIGH_UPDATE_ARRAY_MIN_UPDATE_JC` field of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package.",
+        "completion": "JX Property value : High Update Array minimum update property, value JC corresponding to 1,000,000 update operations. Constant = (short)3;"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROACTIVE_UICC_GET_CHANNEL_STATUS` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Get Channel Status index = 92"
+    },
+    {
+        "prompt": "What is the function of the `TAG_FILE_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : File List tag = 0x12"
+    },
+    {
+        "prompt": "What is the `readRecord(short, byte, short, byte[], short, short)` method of the `FileView` interface in the `uicc.access` package intended for?",
+        "completion": "This method reads a record or a part of a record of the current linear fixed/cyclic EF of the calling applet into the given byte array. The current record pointer can be changed due to the chosen mode.\n\nNotes:\n- If `respOffset` or `respLength` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `respOffset+respLength` is greater than `resp.length`, the length of the `resp` array a `ArrayIndexOutOfBoundsException` exception is thrown and no read is performed.\n\nReturns: `respOffset+respLength`\n\nThrows:\n- `java.lang.NullPointerException` - if `resp` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if reading would cause access of data outside array bounds\n- `UICCException` - in case of error\n- `OUT_OF_RECORD_BOUNDARIES` \n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REF_DATA_INVALIDATED` \n- `NO_EF_SELECTED` \n- `INVALID_MODE` \n- `RECORD_NOT_FOUND` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "State the significance of the `RES_CMD_PERF_REFRESH_ADD_EF_READ` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : REFRESH performed with additional EFs read = 0x03"
+    },
+    {
+        "prompt": "Explain the role of the `EVENT_EVENT_DOWNLOAD_HCI_CONNECTIVITY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event: Event HCI Connectivity = 32"
+    },
+    {
+        "prompt": "What does the `throwIt(short)` method of the `ToolkitException` exception in the `uicc.toolkit` package help to achieve?",
+        "completion": "Throws the JCRE instance of the `ToolkitException` class with the specified reason.\n\nThrows:\n- `ToolkitException` - always"
+    },
+    {
+        "prompt": "What is the function of the `IDX_DISPLAY_TEXT` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Display Text index = 15"
+    },
+    {
+        "prompt": "What does the `CONDITIONS_OF_USE_NOT_SATISFIED` field of the `AdminException` exception in the `uicc.access.fileadministration` package serve to accomplish?",
+        "completion": "This reason code (=3) is used to indicate that the conditions of use are not satisfied."
+    },
+    {
+        "prompt": "What does the `HIGH_UPDATE_ARRAY_MIN_UPDATE_JB` field of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package help to achieve?",
+        "completion": "JX Property value : High Update Array minimum update property, value JB corresponding to 500,000 update operations. Constant = (short)2;"
+    },
+    {
+        "prompt": "What is the function of the `EVENT_NOT_SUPPORTED` field of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This reason code (= 6) is used to indicate that the event code is not supported by the CAT Runtime Environment"
+    },
+    {
+        "prompt": "What is the `appendTLV(byte, byte[], short, short)` method of the `EditHandler` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Appends a TLV element to the current TLV list (byte array format). A successful append does not modify the TLV selected.\n\nThrows:\n- `java.lang.NullPointerException` - if `value` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `valueOffset` or `valueLength` or both would cause access outside array bounds, or if `value2Length` is negative.\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the EditHandler buffer is to small to append the requested data\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `BAD_INPUT_PARAMETER` if `valueLength` is greater than 255"
+    },
+    {
+        "prompt": "What is the `IDX_GET_INPUT_VARIABLE_TIMEOUT` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Support of GET INPUT Variable Time out = (short)272;"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_TRANSACTION_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Transaction identifier tag = 0x1C"
+    },
+    {
+        "prompt": "What is the objective of the `SEARCH_INDICATION_START_FORWARD_FROM_NEXT` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "Search mode indication forward starting at next record"
+    },
+    {
+        "prompt": "Explain the role of the `FID_EF_DIR` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : Directory File EF_DIR = 0x2F00"
+    },
+    {
+        "prompt": "What is the `select(byte)` method of the `FileView` interface in the `uicc.access` package intended for?",
+        "completion": "This method selects a file by SFI in the current directory of the FileView.\nThe file context associated with the FileView object is changed after successful execution. This SELECT method allows to update the current file without handling the Select Response.\n\nThrows:\n- `UICCException` - in case of error\n- `FILE_NOT_FOUND` if a file with the corresponding SFI is not found or if the `sfi` parameter is invalid.\n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `CONDITIONS_OF_USE_NOT_SATISFIED`"
+    },
+    {
+        "prompt": "What is the objective of the `FID_EF_EXT3` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : EF EXT3 = 0x6F4C (under DF TELECOM)"
+    },
+    {
+        "prompt": "What does the `deactivateFile()` method of the `FileView` interface in the `uicc.access` package help to achieve?",
+        "completion": "This method deactivates the currently selected EF. No exception shall be thrown when deactivating an already deactivated EF.\n\nThrows:\n- `UICCException` - in case of error\n- `NO_EF_SELECTED` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `INTERNAL_ERROR` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "What is the function of the `TLV_FOUND_CR_NOT_SET` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "findTLV method result : if TLV is found with CR not set = 0x02"
+    },
+    {
+        "prompt": "What is the function of the `EVENT_FIRST_COMMAND_AFTER_ATR` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Event: First Command After ATR = 127"
+    },
+    {
+        "prompt": "What does the `RES_CMD_PERF_NO_RESP_FROM_USER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "General Result : command performed no response from user = 0x12"
+    },
+    {
+        "prompt": "What does the `IDX_MULTIPLE_ACCESS_TECHNOLOGIES_SUPPORT` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Support: Multiple access technologies = 199"
+    },
+    {
+        "prompt": "Explain the role of the `initGetInput(byte, byte, byte[], short, short, short, short)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Initialize the building of a Get Input Proactive command. The Comprehension Required flags are all set to 1. The following command parameters (i.e. TLVs) may be appended to the command before sending it: Default Text. After the method invocation no TLV is selected.\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `offset` or `length` or both would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the ProactiveHandler buffer is to small to put the requested data"
+    },
+    {
+        "prompt": "What is the `buildTLVHandler(byte, short)` method of the `HandlerBuilder` class in the `uicc.system` package intended for?",
+        "completion": "Allocates a TLVHandler with an internal buffer of length capacity\n\nReturns: a `ViewHandler` object\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `ILLEGAL_VALUE` \n- if the type does not match with the predefined values\n- if `capacity` is negative\n- `NO_RESOURCE` if there are not enough resources in the card to allocate the handler"
+    },
+    {
+        "prompt": "What is the `EVENT_EVENT_DOWNLOAD_ACCESS_TECHNOLOGY_CHANGE_MULTIPLE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Event: Event Download - Access Technology Change (multiple access technologies) type = 128"
+    },
+    {
+        "prompt": "What is the function of the `UNEXPECTED_OVERFLOW` field of the `SuspendException` exception in the `uicc.suspendresume` package?",
+        "completion": "This reason code (= 3) is used to indicate that the value in seconds is above the maximum value allowed (221183999 or 0x0D2EFFFF)."
+    },
+    {
+        "prompt": "What is the objective of the `TAG_EVENT_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Event List tag = 0x19"
+    },
+    {
+        "prompt": "What does the `appendTLV(byte, byte, short)` method of the `EditHandler` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Appends a TLV element to the current TLV list (3-byte element(1-byte,1-short)) This method is useful to add three byte elements as Command details or Display parameters A successful append does not modify the TLV selected.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the EditHandler buffer is to small to append the requested data\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "What does the `appendTLV(byte, byte)` method of the `EditHandler` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Appends a TLV element to the current TLV list (1-byte element). This method is useful to add single byte elements as Item Identifier or Tone. A successful append does not modify the TLV selected.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the EditHandler buffer is to small to append the requested data\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "What does the `TAG_FILE_UPDATE_INFORMATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV: File Update Information tag = 0x3B"
+    },
+    {
+        "prompt": "What does the `ToolkitTestRegistry` interface in the `uicc.toolkit.test` package serve to accomplish?",
+        "completion": "The ToolkitTestRegistry interface offers basic services and methods to allow any Toolkit Applet to register it's configuration (supported test events), during the installation phase and also possible to change it, during all the applet life time. Each Toolkit Applet will get a reference to its registry entry with the static method getEntry from the ToolkitRegistrySystem class. The initial state of all events is cleared. The registry entry object implementing the ToolkitTestRegistry interface is a permanent JCRE entry point object.\n\nAll updates performed on the ToolkitTestRegistry are atomic. The ToolkitTestRegistry update operations are subject to atomic commit capacity limitations. If the commit capacity is exceeded, no update is performed and a TransactionException is thrown."
+    },
+    {
+        "prompt": "What is the objective of the `RES_CMD_PERF_WITH_MODIFICATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "General Result : command performed with modifications = 0x07"
+    },
+    {
+        "prompt": "What is the objective of the `PRO_CMD_GET_READER_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Type of proactive command : GET READER STATUS = 0x33"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_R_APDU` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : R-APDU tag = 0x23"
+    },
+    {
+        "prompt": "What is the function of the `allocateTimer()` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package?",
+        "completion": "Asks the CAT Runtime Environment to allocate a Timer that the applet can manage. By calling this method the applet is registered to the EVENT_TIMER_EXPIRATION of the allocated timer. The timer is allocated by the applet until it explicitly releases it. So it can then issue the Timer Management proactive command to start, stop or get the value of its allocated timer.\n\nReturns: the identifier of the Timer allocated to the applet\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- NO_TIMER_AVAILABLE if all the timers are allocated or the maximum number of timers have been allocated to this applet\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "State the significance of the `getValueShort(short)` method of the `ViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Gets a short from the last TLV element which has been found in the handler.\n\nReturns: element value (1 short)\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element\n- `OUT_OF_TLV_BOUNDARIES` if `valueOffset` is out of the current TLV"
+    },
+    {
+        "prompt": "What is the `DEV_ID_TERMINAL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Device Identity : Terminal = 0x82"
+    },
+    {
+        "prompt": "State the goal of the `TAG_DISPLAY_PARAMETERS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Display parameter tags = 0x40"
+    },
+    {
+        "prompt": "State the goal of the `EVENT_EVENT_DOWNLOAD_LOCAL_CONNECTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Event Download - Local Connection type = 27"
+    },
+    {
+        "prompt": "What does the `TLV_FOUND_CR_NOT_SET` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "findTLV method result : if TLV is found with CR not set = 0x02"
+    },
+    {
+        "prompt": "State the significance of the `EVENT_REMOTE_FILE_UPDATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event: Remote File Update = 125"
+    },
+    {
+        "prompt": "What is the `RES_CMD_PERF_NO_RESP_FROM_USER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "General Result : command performed no response from user = 0x12"
+    },
+    {
+        "prompt": "What does the `MENU_ENTRY_NOT_FOUND` field of the `ToolkitException` exception in the `uicc.toolkit` package help to achieve?",
+        "completion": "This reason code (= 4) is used to indicate that the requested menu entry is not defined for the corresponding applet."
+    },
+    {
+        "prompt": "State the goal of the `NO_TIMER_AVAILABLE` field of the `ToolkitException` exception in the `uicc.toolkit` package.",
+        "completion": "This reason code (=11) is used to indicate that all the available timers or the maximum number of timers have been allocated to the applet"
+    },
+    {
+        "prompt": "What is the `TAG_TRANSACTION_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV: Transaction identifier tag = 0x1C"
+    },
+    {
+        "prompt": "What does the `TAG_TONE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV : Tone tag = 0x0E"
+    },
+    {
+        "prompt": "What does the `getTextStringCodingScheme()` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Returns the data coding scheme byte from the first Text String TLV element of the current response data field. If the element is available it becomes the TLV selected, else no TLV is selected.\n\nReturns: text string coding scheme\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Text String TLV element\n- `OUT_OF_TLV_BOUNDARIES` if the Text String TLV is present with a length of 0 (no DCS byte)"
+    },
+    {
+        "prompt": "Explain the role of the `createFile(ViewHandler)` method of the `AdminFileView` interface in the `uicc.access.fileadministration` package.",
+        "completion": "This method creates a new file under the current DF or ADF, as described in TS 102 222.\n\nThrows:\n- `java.lang.NullPointerException` - if `viewHandler` is `null`\n- `UICCException` - in case of error\n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated\n- `AdminException` - in case of error\n- `FILE_ALREADY_EXISTS` \n- `INCORRECT_PARAMETERS` \n- `NOT_ENOUGH_MEMORY_SPACE` \n- `DF_NAME_ALREADY_EXISTS`\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded."
+    },
+    {
+        "prompt": "What is the `IDX_PROFILE_DOWNLOAD` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Profile Download index = 0"
+    },
+    {
+        "prompt": "Explain the role of the `getTag()` method of the `BERTLVViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Returns the BER Tag of the BER TLV list\n\nReturns: the tag value"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PLAY_TONE_MELODY_THEMED_TONES` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Play Tone (melody Tones and Themed tones) = 170"
+    },
+    {
+        "prompt": "What does the `IDX_EVENT_CHANNEL_STATUS` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event Channel Status index = 43"
+    },
+    {
+        "prompt": "What does the `getPollInterval()` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Returns the number of seconds of the adjusted duration for the calling Toolkit Applet. If the returned duration is equal to `POLL_NO_DURATION`, the Toolkit Applet is not registered to EVENT_STATUS_COMMAND event. The returned duration may :\n- be a multiple of the real adjusted poll interval time at the Terminal.\n- differ from the requested duration due to request of other toolkit applets or due to restrictions of the current Terminal.\n- be the poll interval duration that was determined with the POLL INTERVAL NEGOTIATION mechanism\n- be changed during the card session due requests from other Toolkit Applets\n- not correspond to the elapsed time due to additional STATUS commands send by the Terminal.\n\nReturns: the number of seconds of the adjusted duration for the applet"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_CARD_READER_ID` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Card reader identifier Tag = 0x3A"
+    },
+    {
+        "prompt": "What is the objective of the `registerFileEvent(short, FileView)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package?",
+        "completion": "Register a ToolkitRegistry object to the `EVENT_EXTERNAL_FILE_UPDATE` for a file.\n\nThrows:\n- `java.lang.NullPointerException` - if `aFileView` is `null`\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded\n- `ToolkitException` - with the following reason code:\n- `EVENT_NOT_ALLOWED` if the event is one of the following events: EVENT_MENU_SELECTION, EVENT_MENU_SELECTION_HELP_REQUEST, EVENT_TIMER_EXPIRATION, EVENT_STATUS_COMMAND\n- `EVENT_NOT_SUPPORTED` if the event is not one of the following event: EVENT_EXTERNAL_FILE_UPDATE, EVENT_REMOTE_FILE_UPDATE.\n- `UICCException` - in case of error\n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "What is the `IDX_STYLE_STRIKETHROUGH` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Text Attribute: Style Strikethrough = 228"
+    },
+    {
+        "prompt": "What is the objective of the `UICCSystem` class in the `uicc.access` package?",
+        "completion": "The `UICCSystem class` provides a way to get a view of an UICC File system. The `FileView` objects returned by the methods of this class are permanent JCRE Entry Point Objects."
+    },
+    {
+        "prompt": "State the significance of the `PRO_CMD_SERVICE_SEARCH` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : Service Search = 0x45"
+    },
+    {
+        "prompt": "What does the `BTAG_TIMER_EXPIRATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "BER-TLV : Timer Expiration tag = 0xD7"
+    },
+    {
+        "prompt": "State the goal of the `DF_NAME_ALREADY_EXISTS` field of the `AdminException` exception in the `uicc.access.fileadministration` package.",
+        "completion": "This reason code (=5) is used to indicate that the DF name already exists (only for creation of a DF and if a DF Name TLV is used)"
+    },
+    {
+        "prompt": "What does the `IDX_PROACTIVE_UICC_RECEIVE_DATA` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Proactive UICC Receive Data index = 90"
+    },
+    {
+        "prompt": "State the significance of the `SEARCH_INDICATION_START_BACKWARD_FROM_PREVIOUS` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Search mode indication backward starting from previous record"
+    },
+    {
+        "prompt": "What is the `EVENT_MEMORY_FAILURE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Event: Memory Failure = 129"
+    },
+    {
+        "prompt": "State the purpose of the `INVALID_MODE` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (= 10) is used to indicate to the calling applet that the mode for an operation on a record based file or on a BER-TLV file is invalid."
+    },
+    {
+        "prompt": "What does the `RES_ERROR_BEARER_INDEPENDENT_PROTOCOL_ERROR` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "General Result : Bearer Independent Protocol error = 0x3A"
+    },
+    {
+        "prompt": "What does the `updateBinary(short, byte[], short, short)` method of the `FileView` interface in the `uicc.access` package help to achieve?",
+        "completion": "This method updates the data bytes of the current transparent EF.\n\nNotes:\n- If `dataOffset` or `dataLength` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `dataOffset+dataLength` is greater than `data.length`, the length of the `data` array a `ArrayIndexOutOfBoundsException` exception is thrown and no update is performed.\n\nThrows:\n- `java.lang.NullPointerException` - if `data` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if updating would cause access of data outside array bounds\n- `UICCException` - in case of error\n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REF_DATA_INVALIDATED` \n- `NO_EF_SELECTED` \n- `OUT_OF_FILE_BOUNDARIES` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "State the goal of the `PRO_CMD_SET_UP_CALL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : SET UP CALL = 0x10"
+    },
+    {
+        "prompt": "State the goal of the `retrieveData(int, int, byte[], short, short)` method of the `BERTLVFileView` interface in the `uicc.access.bertlvfile` package.",
+        "completion": "This method retrieves a part of a data object from the current BER-TLV structure EF.\n\nNotes:\n- The TAG and Length of the requested data object are not copied in `responseBuffer` \n- After a successful call to this method, current TAG pointer and current offset in the data object are undefined\n- If `responseOffset` or `responseLength` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `responseOffset+responseLength` is greater than `responseBuffer.length`, the length of the `responseBuffer` array a `ArrayIndexOutOfBoundsException` exception is thrown and no read is performed.\n- If `tag` value is invalid or is equal to '5C', an `UICCException` with reason code `INVALID_TAG_VALUE` is thrown\n\nReturns: Number of remaining bytes to read\n\nThrows:\n- `java.lang.NullPointerException` - if `responseBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if reading would cause access of data outside array bounds\n- `UICCException` - in case of error\n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REF_DATA_INVALIDATED` \n- `NO_EF_SELECTED` \n- `REFERENCED_DATA_NOT_FOUND` \n- `CONDITIONS_OF_USE_NOT_SATISFIED` \n- `OUT_OF_DATA_BOUNDARIES` \n- `INVALID_TAG_VALUE`"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_POWER_ON_CARD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : POWER ON CARD = 0x31"
+    },
+    {
+        "prompt": "What does the `registerFileEvent(short, byte[], short, short, byte[], short, byte)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Register a ToolkitRegistry object to the `EVENT_EXTERNAL_FILE_UPDATE` for a file list.\n\nThrows:\n- `java.lang.NullPointerException` - if `baFileList` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `sOffset` or `sLength` or both would cause access outside array bounds\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.ILLEGAL_VALUE` if `bLength2` is not in the range of 5 - 16 bytes.\n- `ToolkitException` - with the following reason code:\n- `EVENT_NOT_ALLOWED` if the event is one of the following events: EVENT_MENU_SELECTION, EVENT_MENU_SELECTION_HELP_REQUEST, EVENT_TIMER_EXPIRATION, EVENT_STATUS_COMMAND\n- `EVENT_NOT_SUPPORTED` if the event is not one of the following event: EVENT_EXTERNAL_FILE_UPDATE, EVENT_REMOTE_FILE_UPDATE.\n- `UICCException` - in case of error\n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "State the purpose of the `PRO_CMD_OPEN_CHANNEL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : Open Channel = 0x40"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_TIMING` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Provide local Information Timing index = 68"
+    },
+    {
+        "prompt": "Explain the role of the `REC_ACC_MODE_CURRENT` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Record access mode: CURRENT = 0x04"
+    },
+    {
+        "prompt": "Explain the role of the `getValueByte(short)` method of the `ViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Gets a byte from the last TLV element which has been found in the handler.\n\nReturns: element value (1 byte)\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element\n- `OUT_OF_TLV_BOUNDARIES` if `valueOffset` is out of the current TLV"
+    },
+    {
+        "prompt": "State the goal of the `getSize()` method of the `BERTLVViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Returns the BER TLV size, this includes the tag and the length. The length of the TLV list can be retrieved with the ViewHandler.getLength() method.\n\nReturns: the size of the BER TLV structure"
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_LANGUAGE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Provide Local Information Language index = 67"
+    },
+    {
+        "prompt": "What does the `throwIt(short)` method of the `SuspendException` exception in the `uicc.suspendresume` package help to achieve?",
+        "completion": "Throws the JCRE instance of the `SuspendException` class with the specified reason.\n\nThrows:\n- `SuspendException` - always"
+    },
+    {
+        "prompt": "What is the objective of the `ProactiveHandler` interface in the `uicc.toolkit` package?",
+        "completion": "This interface is the basic class for the definition ofProactive commands. Low level methods, as `init()`, `appendTLV()`... will be used to handle generic Proactive commands (standard or future definitions...). The ProactiveHandler class is aTemporary JCRE Entry Point Object. The Toolkit Applets, which need to send Proactive commands, shall call the `getTheHandler()` static method to get the reference of this system instance."
+    },
+    {
+        "prompt": "What is the `TAG_DNS_SERVER_ADDRESS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV : DNS server address = 0x40"
+    },
+    {
+        "prompt": "State the purpose of the `PRO_CMD_SEND_DTMF` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : SEND DTMF = 0x14"
+    },
+    {
+        "prompt": "What is the `EVENT_REMOTE_FILE_UPDATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Event: Remote File Update = 125"
+    },
+    {
+        "prompt": "What does the `disableMenuEntry(byte)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Disables a menu entry. This method doesn't modify the registration state to the EVENT_MENU_SELECTION and EVENT_MENU_SELECTION_HELP_REQUEST. After invocation of this method, during the current card session, the CAT Runtime Environment shall dynamically update the menu stored in the Terminal.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- ENTRY_NOT_FOUND if the menu entry does not exist for this applet\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "What does the `EVENT_EVENT_DOWNLOAD_IDLE_SCREEN_AVAILABLE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event : Event Download - Idle screen available type = 17"
+    },
+    {
+        "prompt": "What does the `getItemIdentifier()` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Returns the item identifier byte value from the first Item Identifier TLV element of the current response data field. If the element is available it becomes the TLV selected, else no TLV is selected.\n\nReturns: item identifier\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Item Identifier TLV element\n- `OUT_OF_TLV_BOUNDARIES` if the item identifier byte is missing in the Item Identifier Comprehension TLV"
+    },
+    {
+        "prompt": "What does the `EVENT_REMOTE_FILE_UPDATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Event: Remote File Update = 125"
+    },
+    {
+        "prompt": "Explain the role of the `NO_EF_SELECTED` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (= 1) is used to indicate that no EF is selected to complete the called method."
+    },
+    {
+        "prompt": "What is the `TAG_MAC` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV: MAC = 0x60"
+    },
+    {
+        "prompt": "State the goal of the `TAG_FCP_SECURITY_ATTRIBUTE_CF` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "TAG in FCP TLV structure: Security attributes Compact Format = 0x8C"
+    },
+    {
+        "prompt": "What is the function of the `FID_EF_EXT4` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : EF EXT4 = 0x6F4E (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the `FID_EF_SDN` field of the `UICCConstants` interface in the `uicc.access` package intended for?",
+        "completion": "File identifier : EF SDN = 0x6F49 (under DF TELECOM)"
+    },
+    {
+        "prompt": "Explain the role of the `FID_EF_EXT1` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : EF EXT1 = 0x6F4A (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the objective of the `EVENT_MENU_SELECTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Event : Menu Selection = 7"
+    },
+    {
+        "prompt": "State the purpose of the `getTheFileView(javacard.framework.AID, byte)` method of the `UICCSystem` class in the `uicc.access` package.",
+        "completion": "Method to get a reference to a FileView object on an ADF file system. The FileView object will only allow access to Files under the ADF specified by the AID. It is not possible to access files which are not located under the ADF. After a succesful invocation of the method the ADF is the currently selected file. This method return `null` if the `Applet.register()` has not yet been invoked, or the filesystem server does not exist or the filesystem server returns `null`\n\nReturns: a reference to a class which implements the FileView interface\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if event is not a valid event code.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "What is the objective of the `DEV_ID_CHANNEL_1` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Device Identity : Channel 1 = 0x21;"
+    },
+    {
+        "prompt": "What does the `INVALID_TAG_VALUE` field of the `UICCException` exception in the `uicc.access` package help to achieve?",
+        "completion": "This reason code (=18) is used to indicate to the calling applet that the TAG value is invalid."
+    },
+    {
+        "prompt": "What does the `BER_TLV_ACC_MODE_FIRST` field of the `UICCConstants` interface in the `uicc.access` package serve to accomplish?",
+        "completion": "First Block = 0x80"
+    },
+    {
+        "prompt": "What does the `IDX_OPEN_CHANNEL_COFIRMATION_PARAMETER` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Confirmation parameters supported for OPEN CHANNEL in Terminal Server Mode = 242"
+    },
+    {
+        "prompt": "What does the `IDX_TCP` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "TCP index = 128"
+    },
+    {
+        "prompt": "What does the `ToolkitTestRegistry` interface in the `uicc.toolkit.test` package help to achieve?",
+        "completion": "The ToolkitTestRegistry interface offers basic services and methods to allow any Toolkit Applet to register it's configuration (supported test events), during the installation phase and also possible to change it, during all the applet life time. Each Toolkit Applet will get a reference to its registry entry with the static method getEntry from the ToolkitRegistrySystem class. The initial state of all events is cleared. The registry entry object implementing the ToolkitTestRegistry interface is a permanent JCRE entry point object.\n\nAll updates performed on the ToolkitTestRegistry are atomic. The ToolkitTestRegistry update operations are subject to atomic commit capacity limitations. If the commit capacity is exceeded, no update is performed and a TransactionException is thrown."
+    },
+    {
+        "prompt": "What is the `IDX_FONT_SIZE_LARGE` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Text Attribute: Font Size Large = 220"
+    },
+    {
+        "prompt": "What is the objective of the `BERTLVEditHandler` interface in the `uicc.toolkit` package?",
+        "completion": "The BERTLVEditHandler interface offers methods to set the TAG of a BER TLV List and to edit the BER TLV list. An object that implements this interface has to take care that the length information of the BER TLV list is updated."
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROACTIVE_UICC_POWER_ON_CARD` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Power On Card index = 48"
+    },
+    {
+        "prompt": "State the goal of the `EVENT_APPLICATION_DESELECT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Application Deselect type = 126"
+    },
+    {
+        "prompt": "What is the function of the `TAG_LOCATION_INFORMATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Location Information tag = 0x13"
+    },
+    {
+        "prompt": "What is the function of the `EVENT_EVENT_DOWNLOAD_CONTACTLESS_STATE_REQUEST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Event: Contactless State Request = 35"
+    },
+    {
+        "prompt": "State the goal of the `IDX_SMS_PP_DOWNLOAD` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "SMS PP Download index = 1"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_R_APDU` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : R-APDU tag = 0x23"
+    },
+    {
+        "prompt": "What is the objective of the `uicc.suspendresume` package?",
+        "completion": "This optional package provides means for applets to interract with the UICC Runtime Environment."
+    },
+    {
+        "prompt": "What is the `RECORD_NOT_FOUND` field of the `UICCException` exception in the `uicc.access` package used for?",
+        "completion": "This reason code (= 9) is used to indicate to the calling applet that no record was found."
+    },
+    {
+        "prompt": "What does the `FID_EF_EXT2` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "File identifier : EF EXT2 = 0x6F4B (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the function of the `ToolkitRegistry` interface in the `uicc.toolkit` package?",
+        "completion": "The `ToolkitRegistry` interface offers basic services and methods to allow any Toolkit Applet to register its configuration (supported events) during the install phase and possibly to change it during all the applet life time. Each Toolkit Applet will get a reference to its registry entry with the static method `getEntry` from the `ToolkitRegistrySystem` class The initial state of all the events is cleared. The registry entry object implementing the `ToolkitRegistry` interface is a permanent JCRE entry point object\n\nAll updates performed on the `ToolkitRegistry` are atomic. The `ToolkitRegistry` update operations are subject to atomic commit capacity limitations. If the commit capacity is exceeded, no update is performed and a `TransactionException` exception is thrown.\n\nNote: the constants related to the events are defined in the `ToolkitConstants` interface."
+    },
+    {
+        "prompt": "What is the `IDX_DIRECT_COMMUNICATION_FOR_OPEN_CHANNEL` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Direct communication channel supported for OPEN CHANNEL in Terminal Server Mode = 252;"
+    },
+    {
+        "prompt": "What is the function of the `TAG_MULTIMEDIA_MESSAGE_NOTIFICATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV: Multimedia Message Notification tag = 0x6F"
+    },
+    {
+        "prompt": "What is the `TAG_OTHER_DATA_DESTINATION_ADDRESS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV : Other address (data destination address) = 0x3E"
+    },
+    {
+        "prompt": "What does the `TAG_FCP_SHORT_FILE_IDENTIFIER` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "TAG in FCP TLV structure: Short File Identifier = 0x88"
+    },
+    {
+        "prompt": "Explain the role of the `PRO_CMD_GET_CHANNEL_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : Get Channel Status = 0x44"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_SET_UP_EVENT_LIST` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Proactive UICC Set Up Event List index = 32"
+    },
+    {
+        "prompt": "What does the `IDX_PROACTIVE_UICC_ACTIVATE` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Proactive UICC: ACTIVATE = 236"
+    },
+    {
+        "prompt": "What is the objective of the `EVENT_EVENT_DOWNLOAD_IDLE_SCREEN_AVAILABLE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Event : Event Download - Idle screen available type = 17"
+    },
+    {
+        "prompt": "What is the `TAG_TERMINAL_POWER_SUPPLY` field of the `TerminalCapabilityHandler` class in the `uicc.system` package intended for?",
+        "completion": "Terminal power supply tag = 0x80"
+    },
+    {
+        "prompt": "What is the `IDX_CSD` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "CSD index = 96"
+    },
+    {
+        "prompt": "What is the `appendTLV(byte, byte[], short, short, byte[], short, short)` method of the `EditHandler` interface in the `uicc.toolkit` package used for?",
+        "completion": "Appends a TLV element to the current TLV list (2 byte arrays format). A successful append does not modify the TLV selected.\n\nThrows:\n- `java.lang.NullPointerException` - if `value1` or `value2` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `value1Offset` or `value1Length` or both would cause access outside value1 array bounds, or if `value1Length` is negative, if `value2Offset` or `value2Length` or both would cause access outside value2 array bounds, or if `value2Length` is negative.\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the EditHandler buffer is to small to append the requested data\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `BAD_INPUT_PARAMETER` if `value1Length` or `value2Length` is greater than 255"
+    },
+    {
+        "prompt": "State the significance of the `deregisterTestEventRxApdu(short, byte[], short, short)` method of the `ToolkitTestRegistry` interface in the `uicc.toolkit.test` package.",
+        "completion": "Deregister a ToolkitTestRegistry object to the EVENT_TEST_RX_APDU for an instruction code list. Example: include INS=78 (GET IDENTITY) and INS=88 (AUTHENTICATION)\n\nThrows:\n- `ToolkitException` -\n- EVENT_NOT_SUPPORTEDif the event is not one of the following event: EVENT_TEST_RX_APDU.\n- `java.lang.NullPointerException` - If baInsCode is null\n- `java.lang.ArrayIndexOutOfBoundsException` - If sOffset or sLength or both would cause access outside array bounds\n- `javacard.framework.TransactionException` - If the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "State the purpose of the `getTheFileView(byte[], short, byte, byte)` method of the `UICCSystem` class in the `uicc.access` package.",
+        "completion": "Method to get a reference to a FileView object on an ADF file system.\nThe FileView object will only allow access to Files under the ADF specified by the AID. It is not possible to access files which are not located under the ADF. After a succesful invocation of the method the ADF is the currently selected file.\nThis method return `null` if the `Applet.register()` has not yet been invoked, or the filesystem server does not exist or the filesystem server returns `null` \n\n\nNotes:\n- If `bOffset` or `bLength` is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `bOffset+bLength` is greater than `buffer.length`, the length of the `buffer` array an `ArrayIndexOutOfBoundsException` exception is thrown.\n\nReturns: a reference to an object which implements the FileView interface, or null.\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - in case of access outside array bounds\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if event is not a valid event code or `bLength` is not in the range of 5 - 16 bytes.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROACTIVE_UICC_GET_READER_STATUS_IDENTIFIER` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Get Reader Status (identifier) index = 52"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_MCC_MNC_LAC_CELLID_IMEI` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Proactive UICC Proactive Local Information MSS,MNC,LAC,CELLID,IMEI index = 30"
+    },
+    {
+        "prompt": "State the goal of the `UICCPlatform` class in the `uicc.system` package.",
+        "completion": "The `UICCPlatform` class contains static method(s) to retrieve references to object(s) owned by the JCRE context, like Global Arrays.\n\nSee Java Card(TM) Runtime Environment (JCRE) Specification for details."
+    },
+    {
+        "prompt": "State the purpose of the `TAG_LAST_ENVELOPE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Last Envelope tag = 0x70"
+    },
+    {
+        "prompt": "State the goal of the `TAG_SUPPORTED_RADIO_ACCESS_TECHNOLOGIES` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Supported Radio Access Technologies Tag = 0x34"
+    },
+    {
+        "prompt": "What is the `IDX_GPRS` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "GPRS index = 97"
+    },
+    {
+        "prompt": "What is the objective of the `RES_CMD_PERF_SESSION_TERM_USER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "General Result : proactive UICC session terminated by user = 0x10"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_EVENT_DATA_AVAILABLE` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Event Data Available index = 42"
+    },
+    {
+        "prompt": "What is the `RES_CMD_PERF_SESSION_TERM_USER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "General Result : proactive UICC session terminated by user = 0x10"
+    },
+    {
+        "prompt": "What is the `getTheVolatileByteArray()` method of the `UICCPlatform` class in the `uicc.system` package used for?",
+        "completion": "Returns the instance of the volatile byte array designated by the JCRE as global array. The byte array length shall be at least equal to 256 bytes.\n\nNotes:\n- Writes to its fields will not be affected by transactions.\n- The content of this array is not guaranteed across APDUs.\n- A reference to this byte array cannot be stored in class variables or instance variables or array components. See Java Card(TM) Runtime Environment (JCRE) Specification, Global Arrays for details.\n\nReturns: reference to the volatile byte array.\n\nThrows:\n- `java.lang.SecurityException` - if the method is invoked from a context which is not the currently selected applet or the currently triggered applet i.e. the context of the applet that treats the current APDU or the context of the applet that has been triggered by the current APDU."
+    },
+    {
+        "prompt": "State the purpose of the `TAG_MULTIMEDIA_MESSAGE_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Multimedia Message Identifier tag = 0x6B"
+    },
+    {
+        "prompt": "What does the `RES_ERROR_LAUNCH_BROWSE_GENERIC_CODE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Generic Result : Launch browser generic error code = 0x26;"
+    },
+    {
+        "prompt": "What does the `TAG_URI` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : URI Tag = 0x31"
+    },
+    {
+        "prompt": "What does the `COMMAND_NOT_ALLOWED` field of the `UICCException` exception in the `uicc.access` package serve to accomplish?",
+        "completion": "This reason code (= 11) is used to indicate that the method was applied on a file in state terminated.."
+    },
+    {
+        "prompt": "State the purpose of the `REC_ACC_MODE_NEXT` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Record access mode: NEXT = 0x02"
+    },
+    {
+        "prompt": "What does the `EVENT_EVENT_DOWNLOAD_LANGUAGE_SELECTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Event : Event Download - Language Selection type = 20"
+    },
+    {
+        "prompt": "Explain the role of the `RES_CMD_PERF` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : command performed successfully = 0x00"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_GET_SERVICE_INFORMATION` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Proactive UICC Get Service information index = 94"
+    },
+    {
+        "prompt": "Explain the role of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_MCC_MNC_LAC_CELLID_IMEI` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Proactive Local Information MSS,MNC,LAC,CELLID,IMEI index = 30"
+    },
+    {
+        "prompt": "What does the `FID_DF_TELECOM` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "File identifier : DF TELECOM = 0x7F10"
+    },
+    {
+        "prompt": "What is the objective of the `buildTLVHandler(byte, short, byte[], short, short)` method of the `HandlerBuilder` class in the `uicc.system` package?",
+        "completion": "Allocates a TLVHandler with an internal buffer of length capacity. Copies the buffer content to an internal buffer of the TLVHandler starting at `offset`. The internal buffer shall be at least `length` long.\n\nReturns: a `ViewHandler` object\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `ILLEGAL_VALUE` \n- if the type does not match with the predefined values\n- if `capacity` is negative\n- `NO_RESOURCE` if there are not enough resources in the card to allocate the handler\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` -\n- if `offset` would cause access outside array bounds, or if `length` is negative.\n- if `offset+length` is greater than the length of the buffer\n- `ToolkitException` - with the following reason code:\n- `BAD_INPUT_PARAMETER` if `length` is greater than `capacity`"
+    },
+    {
+        "prompt": "What does the `makeHighUpdateByteArray(short)` method of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package help to achieve?",
+        "completion": "Create a persistent `byte` array with the specified array length and with extended endurance in terms of update operations with respect to arrays created by means of the Java `new` keyword\n\nReturns: the new high update byte array\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.NO_RESOURCE` if there are not enough resources in the card to allocate the array\n- `java.lang.NegativeArraySizeException` - if the length parameter is negative"
+    },
+    {
+        "prompt": "What does the `FID_EF_BDN` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "File identifier : EF BDN = 0x6F4D (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the `RES_CMD_PERF_HELP_INFO_REQ` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "General Result : command performed help information required= 0x13"
+    },
+    {
+        "prompt": "What does the `DEV_ID_ADDITIONAL_CARD_READER_1` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Device Identity : Additional Card Reader 1 = 0x11"
+    },
+    {
+        "prompt": "State the goal of the `PRO_CMD_GET_INPUT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : GET INPUT = 0x23"
+    },
+    {
+        "prompt": "State the goal of the `IDX_EVENT_BROWSING_STATUS` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Event: Browsing Status = 192"
+    },
+    {
+        "prompt": "What is the `DEV_ID_CHANNEL_5` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Device Identity : Channel 1 = 0x25;"
+    },
+    {
+        "prompt": "What is the `IDX_STYLE_TEXT_BACKGROUND_COLOUR` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Text Attribute: Style Text Background Colour = 230"
+    },
+    {
+        "prompt": "What is the objective of the `TLV_NOT_FOUND` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "findTLV method result : if TLV is not found in the handler = 0x00"
+    },
+    {
+        "prompt": "What is the `registerTestEventRxApdu(short, byte[], short, short)` method of the `ToolkitTestRegistry` interface in the `uicc.toolkit.test` package intended for?",
+        "completion": "Register a ToolkitTestRegistry object to the EVENT_TEST_RX_APDU for an instruction code list. Example: include INS=78 (GET IDENTITY) and INS=88 (AUTHENTICATION)\n\nThrows:\n- `ToolkitException` -\n- EVENT_NOT_SUPPORTEDif the event is not one of the following event: EVENT_TEST_RX_APDU.\n- `java.lang.NullPointerException` - If baInsCode is null\n- `java.lang.ArrayIndexOutOfBoundsException` - If sOffset or sLength or both would cause access outside array bounds\n- `javacard.framework.TransactionException` - If the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "What does the `TAG_CALL_CONTROL_REQUESTED_ACTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV : Call Control requested action tag = 0x27"
+    },
+    {
+        "prompt": "State the goal of the `IDX_DIRECT_COMMUNICATION_FOR_OPEN_CHANNEL` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Direct communication channel supported for OPEN CHANNEL in Terminal Server Mode = 252;"
+    },
+    {
+        "prompt": "What does the `check(byte[], short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Checks a set of facilities in the handset profile. The method checks all the facilities corresponding to bits set to 1 in the mask buffer.\n\nNotes:\n- If `offset` or `length` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown and no check is performed.\n- If `offset+length` is greater than `mask.length`, the length of the `mask` array an `ArrayIndexOutOfBoundsException` exception is thrown and no check is performed.\n\nReturns: true if the bitwise AND of the TerminalProfile data padded with 0 and the `mask` is equal to the `mask`, false otherwise. If `length` is equal to `0`, true is returned.\n\nThrows:\n- `java.lang.NullPointerException` - if `mask` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if check would cause access of data outside mask array bounds\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available"
+    },
+    {
+        "prompt": "State the goal of the `TAG_FILE_UPDATE_INFORMATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: File Update Information tag = 0x3B"
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROACTIVE_UICC_TIMER_MANAGEMENT_START_STOP` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Timer Management (start, stop) index = 56"
+    },
+    {
+        "prompt": "State the goal of the `PRO_CMD_SELECT_ITEM` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : SELECT ITEM = 0x24"
+    },
+    {
+        "prompt": "State the significance of the `EDIT_HANDLER` field of the `HandlerBuilder` class in the `uicc.system` package.",
+        "completion": ""
+    },
+    {
+        "prompt": "What does the `SEARCH_INDICATION_START_BACKWARD_FROM_PREVIOUS` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "Search mode indication backward starting from previous record"
+    },
+    {
+        "prompt": "What does the `CONDITIONS_OF_USE_NOT_SATISFIED` field of the `UICCException` exception in the `uicc.access` package serve to accomplish?",
+        "completion": "This reason code (= 14) is used to indicate to the calling applet that the conditions of use are not satisfied."
+    },
+    {
+        "prompt": "State the significance of the `TAG_ICON_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Icon Identifier tag = 0x1E"
+    },
+    {
+        "prompt": "What does the `TAG_DATE_TIME_AND_TIME_ZONE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : Date-Time and Time Zone tag = 0x26"
+    },
+    {
+        "prompt": "What is the `deactivateFile()` method of the `FileView` interface in the `uicc.access` package intended for?",
+        "completion": "This method deactivates the currently selected EF. No exception shall be thrown when deactivating an already deactivated EF.\n\nThrows:\n- `UICCException` - in case of error\n- `NO_EF_SELECTED` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `INTERNAL_ERROR` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "Explain the role of the `IDX_PROACTIVE_UICC_RUN_AT_COMMAND` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Run AT Command index = 61"
+    },
+    {
+        "prompt": "Explain the role of the `disableMenuEntry(byte)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package.",
+        "completion": "Disables a menu entry. This method doesn't modify the registration state to the EVENT_MENU_SELECTION and EVENT_MENU_SELECTION_HELP_REQUEST. After invocation of this method, during the current card session, the CAT Runtime Environment shall dynamically update the menu stored in the Terminal.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- ENTRY_NOT_FOUND if the menu entry does not exist for this applet\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "What is the `TAG_NETWORK_MEASUREMENT_RESULTS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV : Network Measurement Results tag = 0x16"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_IRDA` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "IRDA index = 99"
+    },
+    {
+        "prompt": "State the purpose of the `getChannelIdentifier()` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Returns the `channelIdentifier` value from the first Channel status TLV element in the current response data field. If the element is available it becomes the currently selected TLV, else no TLV is selected..\n\nReturns: `channelIdentifier`\n\nThrows:\n- `ToolkitException` - - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element.\n- `OUT_OF_TLV_BOUNDARIES` if the Comprehension TLV Channel Status length is equal to zero."
+    },
+    {
+        "prompt": "Explain the role of the `REF_DATA_INVALIDATED` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (=6) is used to indicate to the calling applet that the referenced data are invalidated"
+    },
+    {
+        "prompt": "What does the `TAG_FCP_SECURITY_ATTRIBUTE_REF_EF` field of the `UICCConstants` interface in the `uicc.access` package serve to accomplish?",
+        "completion": ""
+    },
+    {
+        "prompt": "State the goal of the `IDX_SOFT_KEYS_SELECT_ITEM` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Soft Keys Select Item index = 72"
+    },
+    {
+        "prompt": "State the purpose of the `SEARCH_INDICATION_START_FORWARD_FROM_NEXT_GR` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Search mode indication forward starting at given record number"
+    },
+    {
+        "prompt": "What is the objective of the `PRO_CMD_PERFORM_CARD_APDU` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Type of proactive command : PERFORM CARD APDU = 0x30"
+    },
+    {
+        "prompt": "What is the `TAG_ATTRIBUTE_INFORMATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV : Attribute Information = 0x44"
+    },
+    {
+        "prompt": "What is the function of the `TAG_COMMAND_DETAILS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Command Details tag = 0x01"
+    },
+    {
+        "prompt": "What is the `TAG_BROWSING_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV: Browsing Status tag = 0x64"
+    },
+    {
+        "prompt": "State the goal of the `RES_ERROR_CMD_BEYOND_TERMINAL_CAPAB` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : command beyond terminal's capabilities = 0x30"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_DATE_TIME` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Provide Local Information Date Time index = 58"
+    },
+    {
+        "prompt": "What does the `TAG_SERVICE_AVAILABILITY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : Service Availability = 0x45"
+    },
+    {
+        "prompt": "What does the `TAG_LANGUAGE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV : Language Tag = 0x2D"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_CAT_SERVICE_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : CAT service list tag = 0x12"
+    },
+    {
+        "prompt": "What does the `IDX_PROACTIVE_UICC_SEND_DATA` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Proactive UICC Send Data index = 91"
+    },
+    {
+        "prompt": "Explain the role of the `RES_CMD_PERF_MISSING_INFO` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : command performed with missing information = 0x02"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROACTIVE_UICC_POLLING_OFF` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Polling OFF index = 22"
+    },
+    {
+        "prompt": "Explain the role of the `IDX_PROACTIVE_UICC_POLLING_OFF` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Polling OFF index = 22"
+    },
+    {
+        "prompt": "What is the function of the `EVENT_TEST_EXTERNAL_FILE_READ` field of the `ToolkitTestConstants` interface in the `uicc.toolkit.test` package?",
+        "completion": "Test Specific EVENT_TEST_EXTERNAL_FILE_READ"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_FRAMES_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Frames Identifier tag = 0x68"
+    },
+    {
+        "prompt": "What is the objective of the `FID_EF_EXT4` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : EF EXT4 = 0x6F4E (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_SELECT_ITEM` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : SELECT ITEM = 0x24"
+    },
+    {
+        "prompt": "What is the `FID_DF_GRAPHICS` field of the `UICCConstants` interface in the `uicc.access` package intended for?",
+        "completion": "File identifier : DF Graphics = 0x5F50 (under DF TELECOM)"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_RESULT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Result tag = 0x03"
+    },
+    {
+        "prompt": "What does the `RES_CMD_PERF_BACKWARD_MOVE_REQ` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "General Result : command performed backward move requested = 0x11"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_FCP_LCS_INTEGER` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Tag in FCP TLV structure: Life Cycle Status Information = 0x8A"
+    },
+    {
+        "prompt": "What is the `getTheHandler()` method of the `ProactiveHandlerSystem` class in the `uicc.toolkit` package used for?",
+        "completion": "Returns the single system instance of the `ProactiveHandler` class. The applet shall get the reference of the handler at its triggering, the beginning of the processToolkit method.\n\nReturns: reference of the temporary JCRE entry point object of the ProactiveHandler\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy."
+    },
+    {
+        "prompt": "What is the `TAG_SERVICE_AVAILABILITY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV : Service Availability = 0x45"
+    },
+    {
+        "prompt": "What does the `RES_CMD_PERF_LIMITED_SERVICE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "General Result : command performed successfully limited service = 0x06"
+    },
+    {
+        "prompt": "What is the function of the `getEntry()` method of the `ToolkitRegistrySystem` class in the `uicc.toolkit` package?",
+        "completion": "This method is used by the Toolkit Applet to get a reference to its Toolkit Registry entry, so that it can handle its registration state to the toolkit events.\n\nThis method returns `null` if the `Applet.register()` has not yet been invoked or if the server does not exist or if the server returns `null`.\n\nReturns: reference to the applet ToolkitRegistry object\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- REGISTRY_ERROR in case of register error"
+    },
+    {
+        "prompt": "State the purpose of the `TIME_UNIT_MINUTES` field of the `SuspendConstants` interface in the `uicc.suspendresume` package.",
+        "completion": "Time Unit : minutes = 1"
+    },
+    {
+        "prompt": "What is the function of the `uicc.system` package?",
+        "completion": "This package provides the means to the applets for accessing system wide services of the UICC platform."
+    },
+    {
+        "prompt": "State the goal of the `makeHighUpdateShortArray(short)` method of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package.",
+        "completion": "Create a persistent `short` array with the specified array length and with extended endurance in terms of update operations with respect to arrays created by means of the Java `new` keyword.\n\nReturns: the new high update short array\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.NO_RESOURCE` if there are not enough resources in the card to allocate the array\n- `java.lang.NegativeArraySizeException` - if the length parameter is negative"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_OPEN_CHANNEL` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Proactive UICC Open Channel index = 88"
+    },
+    {
+        "prompt": "What is the `TAG_PROFILE_ID` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV: Profile ID tag = 0x67"
+    },
+    {
+        "prompt": "What is the `makeHighUpdateObjectArray(short)` method of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package intended for?",
+        "completion": "Create a persistent `Object` array with the specified array length and with extended endurance in terms of update operations with respect to arrays created by means of the Java `new` keyword.\n\nReturns: the new high update Object array\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.NO_RESOURCE` if there are not enough resources in the card to allocate the array\n- `java.lang.NegativeArraySizeException` - if the length parameter is negative"
+    },
+    {
+        "prompt": "What is the `FID_EF_FDN` field of the `UICCConstants` interface in the `uicc.access` package used for?",
+        "completion": "File identifier : EF FDN = 0x6F3B (under DF TELECOM)"
+    },
+    {
+        "prompt": "Explain the role of the `EVENT_TEST_EXTERNAL_FILE_READ` field of the `ToolkitTestConstants` interface in the `uicc.toolkit.test` package.",
+        "completion": "Test Specific EVENT_TEST_EXTERNAL_FILE_READ"
+    },
+    {
+        "prompt": "What does the `RES_CMD_PERF_LIMITED_SERVICE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "General Result : command performed successfully limited service = 0x06"
+    },
+    {
+        "prompt": "State the goal of the `PRO_CMD_SERVICE_SEARCH` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : Service Search = 0x45"
+    },
+    {
+        "prompt": "State the goal of the `getLength()` method of the `ViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Returns the length of the TLV list.\n\nReturns: length in bytes\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "State the purpose of the `EVENT_PROFILE_DOWNLOAD` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Profile Download = 1"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_REGISTRY_APPLICATION_DATA` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Registry application data tag = 0x71"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_BROADCAST_NETWORK` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC: PROVIDE LOCAL INFORMATION (Boradcast Network Informations)=238"
+    },
+    {
+        "prompt": "What does the `EnvelopeResponseHandler` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "The `EnvelopeResponseHandler` interface contains basic methods to handle theEnvelope responsedata field. This class will be used by the Toolkit Applet in order to edit the response to current Envelope command. A class implementing the `EnvelopeResponseHandler` interface is aTemporary JCRE Entry Point Object. The only way to get an `EnvelopeResponseHandler` reference is through the static `getTheHandler()` method of the `EvelopeResponseHandlerSystem` class."
+    },
+    {
+        "prompt": "Explain the role of the `IDX_OPEN_CHANNEL_CONFIRMATION_PARAMETER` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Confirmation parameters supported for OPEN CHANNEL in Terminal Server Mode = 242"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_ITEM` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Item tag = 0x0F"
+    },
+    {
+        "prompt": "Explain the role of the `COMPARE_IS_EQUAL` field of the `SuspendConstants` interface in the `uicc.suspendresume` package.",
+        "completion": "Compare if time values are equal = 1"
+    },
+    {
+        "prompt": "What does the `isPrioritizedProactiveHandlerAvailableEventSet()` method of the `ToolkitRegistrySystem` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Allows to find out if another applet with higher or the same priority level has registered for EVENT_PROACTIVE_HANDLER_AVAILABLE.\n\nReturns: true if another applet with higher or the same priority level is registered for EVENT_PROACTIVE_HANDLER_AVAILABLE, false otherwise"
+    },
+    {
+        "prompt": "What does the `IDX_DISPLAY_RESIZE` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Display Resize index = 120"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_GET_READER_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : GET READER STATUS = 0x33"
+    },
+    {
+        "prompt": "What is the `EVENT_PROACTIVE_HANDLER_AVAILABLE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Event: Proactive Handler Available = 123"
+    },
+    {
+        "prompt": "What is the function of the `FID_EF_DIR` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : Directory File EF_DIR = 0x2F00"
+    },
+    {
+        "prompt": "What does the `TIME_UNIT_DAYS` field of the `SuspendConstants` interface in the `uicc.suspendresume` package serve to accomplish?",
+        "completion": "Time Unit : days = 3"
+    },
+    {
+        "prompt": "Explain the role of the `IDX_REFRESH_eUICC_PROFILE_STATE_CHANGE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Support of Refresh eUICC Profile State Change = (short)269;"
+    },
+    {
+        "prompt": "What is the objective of the `RES_CMD_PERF_REQ_ICON_NOT_DISP` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "General Result : command performed requested icon not displayed= 0x04"
+    },
+    {
+        "prompt": "What is the objective of the `getCapacity()` method of the `ViewHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Returns the maximum size of the Comprehension TLV list managed by the handler.\n\nReturns: size in byte\n\nThrows:\n- `ToolkitException` - - with the following reason codes:\n- HANDLER_NOT_AVAILABLE if the handler is busy"
+    },
+    {
+        "prompt": "What is the function of the `IDX_DISPLAY_RESIZE` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Display Resize index = 120"
+    },
+    {
+        "prompt": "What is the function of the `IDX_PROVIDE_LOCAL_INFORMATION_IMEISV` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Provide Local Information (IMEISV)= 142;"
+    },
+    {
+        "prompt": "State the goal of the `RES_ERROR_INTERACT_CC_SMSMO_BY_NAA` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : interaction with CC NAA = 0x39"
+    },
+    {
+        "prompt": "What is the `IDX_UDP` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "UDP index = 129"
+    },
+    {
+        "prompt": "State the significance of the `TAG_TEXT_STRING` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Text String tag = 0x0D"
+    },
+    {
+        "prompt": "What is the `uicc.toolkit` package used for?",
+        "completion": "This package provides the means for the toolkit applets to register to the events of the common application toolkit (CAT) framework, to handle TLV information and to send proactive commands according to the ETSI TS 102 223 specification.\nThe Package Application Identifier (AID) format is defined in TS 101 220"
+    },
+    {
+        "prompt": "What does the `UNAVAILABLE_ELEMENT` field of the `ToolkitException` exception in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "This reason code (= 3) is used to indicate that the element is unavailable in the handler buffer."
+    },
+    {
+        "prompt": "State the purpose of the `TIME_UNIT_TEN_DAYS` field of the `SuspendConstants` interface in the `uicc.suspendresume` package.",
+        "completion": "Time Unit : 10 days = 4"
+    },
+    {
+        "prompt": "State the purpose of the `uicc.toolkit.test` package.",
+        "completion": "This package provides the means for the toolkit applets to register to test events defined for the UICC in REL-18.\nThe Package Application Identifier (AID) format is defined in TS 101 220"
+    },
+    {
+        "prompt": "State the goal of the `makeHighUpdateObjectArray(short)` method of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package.",
+        "completion": "Create a persistent `Object` array with the specified array length and with extended endurance in terms of update operations with respect to arrays created by means of the Java `new` keyword.\n\nReturns: the new high update Object array\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.NO_RESOURCE` if there are not enough resources in the card to allocate the array\n- `java.lang.NegativeArraySizeException` - if the length parameter is negative"
+    },
+    {
+        "prompt": "What is the `IDX_PROACTIVE_UICC_DISPLAY_TEXT` field of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Proactive UICC Display Text index = 16"
+    },
+    {
+        "prompt": "What is the function of the `REGISTRY_ERROR` field of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This reason code (= 5) is used to indicate an error in the applet registry"
+    },
+    {
+        "prompt": "What is the objective of the `ToolkitRegistrySystem` class in the `uicc.toolkit` package?",
+        "completion": "The `ToolkitRegistrySystem` class provides the means to retrieve an instance of an Object implementing the `ToolkitRegistry` interface."
+    },
+    {
+        "prompt": "What is the `TAG_FRAMES_LAYOUT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV: Frames Layout tag = 0x66"
+    },
+    {
+        "prompt": "Explain the role of the `FID_EF_CCP` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : EF CCP = 0x6F3D (under DF TELECOM)"
+    },
+    {
+        "prompt": "Explain the role of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "The `TerminalProfile` class contains methods to question the terminal profile, regarding the support for \"Common Application Toolkit CAT\" and supposing that this profile has been set by theTerminal ProfileAPDU command."
+    },
+    {
+        "prompt": "What is the `initCloseChannel(byte)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Builds a Close Channel Proactive command without sending the command. The Comprehension Required flags are all set to 1. After the method invocation no TLV is selected."
+    },
+    {
+        "prompt": "State the goal of the `TAG_FCP_FILE_DESCRIPTOR` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "TAG in FCP TLV structure: File Descriptor = 0x82"
+    },
+    {
+        "prompt": "State the purpose of the `EVENT_TERMINAL_APPLICATIONS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event: Terminal Applications=130"
+    },
+    {
+        "prompt": "What is the `COMPARE_IS_EQUAL` field of the `SuspendConstants` interface in the `uicc.suspendresume` package intended for?",
+        "completion": "Compare if time values are equal = 1"
+    },
+    {
+        "prompt": "State the goal of the `EVENT_EVENT_DOWNLOAD_CHANNEL_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Event Download - Channel Status type = 23"
+    },
+    {
+        "prompt": "What is the objective of the `NOT_ENOUGH_MEMORY_SPACE` field of the `UICCException` exception in the `uicc.access` package?",
+        "completion": "This reason code (=17) is used to indicate to the calling applet that the requested memory is not available."
+    },
+    {
+        "prompt": "What does the `FID_EF_SDN` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "File identifier : EF SDN = 0x6F49 (under DF TELECOM)"
+    },
+    {
+        "prompt": "What does the `TAG_FCP_SECURITY_ATTRIBUTE_CF` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "TAG in FCP TLV structure: Security attributes Compact Format = 0x8C"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_OPEN_CHANNEL_CONFIRMATION_PARAMETER` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Confirmation parameters supported for OPEN CHANNEL in Terminal Server Mode = 242"
+    },
+    {
+        "prompt": "What is the function of the `IDX_XHTML_BROWSER_SUPPORTED` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "XHTML Browser supported = 161"
+    },
+    {
+        "prompt": "What does the `IDX_EVENT_POLL_INTERVAL_NEGOTIATION` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Event Poll Interval Negotiation support(i.e. class as is supported) = (short)258;"
+    },
+    {
+        "prompt": "What is the `OUT_OF_DATA_BOUNDARIES` field of the `UICCException` exception in the `uicc.access` package intended for?",
+        "completion": "This reason code (=16) is used to indicate to the calling applet that the length passed to the called method is out of the data boundaries."
+    },
+    {
+        "prompt": "What is the objective of the `ProactiveHandlerSystem` class in the `uicc.toolkit` package?",
+        "completion": "The `ProactiveHandlerSystem` class provides the means to retrieve an instance of an Object implementing the `ResponseHandler` interface."
+    },
+    {
+        "prompt": "What does the `UNEXPECTED_TIME_UNIT` field of the `SuspendException` exception in the `uicc.suspendresume` package serve to accomplish?",
+        "completion": "This reason code (= 1) is used to indicate that the time unit format is not recognized because the value is not defined in `SuspendConstants`."
+    },
+    {
+        "prompt": "Explain the role of the `IDX_LAUNCH_PARAMETERS_FOR_OPEN_CHANNEL` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Launch parameter supported for OPEN CHANNEL in Terminal Server Mode = 251"
+    },
+    {
+        "prompt": "What does the `IDX_EVENT_LANGUAGAE_SELECTION` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event Language Selection index = 40"
+    },
+    {
+        "prompt": "State the purpose of the `AdminFileViewBuilder` class in the `uicc.access.fileadministration` package.",
+        "completion": "The `AdminFileViewBuilder` class provides a way to get a administrative view of a UICC File system server. The `AdminFileView` objects returned by the methods of this class are permanent JCRE Entry Point Objects."
+    },
+    {
+        "prompt": "What does the `IDX_TEXT_SCROLLING` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Text Scrolling index = 122"
+    },
+    {
+        "prompt": "State the purpose of the `getValue(short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Returns the binary value of a parameter, delimited by two indexes, from the handset profile.\n\nReturns: binary value of the data field indicated in the handset profile. The `indexLSB` bit in the TerminalProfile data is the Lowest Significant bit in the short returned value. If padding is necessary, the returned value is left padded with 0. The values outside the TerminalProfile data available are considered to bet set to 0. The return value is according to the following example:\n- If `indexMSB` =108 and `indexLSB` =104, the return value is the number of characters down the Terminal display.\n- If `indexMSB` =31 and `indexLSB` =16, the return value is a short built from the 4th and 3rd byte of the handset profile with the 4th byte as the Most significant byte.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available\n- BAD_INPUT_PARAMETER if `(indexMSB >= indexLSB +16)` or `(indexMSB < indexLSB)` or `(indexMSB < 0)` or `(indexLSB < 0)`"
+    },
+    {
+        "prompt": "What does the `TAG_CALL_CONTROL_REQUESTED_ACTION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : Call Control requested action tag = 0x27"
+    },
+    {
+        "prompt": "What is the `TAG_APPLICATION_SPECIFIC_REFRESH` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV: Application specific refresh tag = 0x3B"
+    },
+    {
+        "prompt": "State the significance of the `IDX_CONTAINER_AND_SESSION_CONTROL` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC: Profile Container, Envelope Container, COMMAND CONTAINER and ENCAPSULATED SESSION CONTROL = 247;"
+    },
+    {
+        "prompt": "What is the function of the `COMPARE_IS_LOWER` field of the `SuspendConstants` interface in the `uicc.suspendresume` package?",
+        "completion": "Compare time is lower = 2"
+    },
+    {
+        "prompt": "State the goal of the `TAG_PROFILE_ID` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Profile ID tag = 0x67"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_DISPLAY_TEXT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : DISPLAY TEXT = 0x21"
+    },
+    {
+        "prompt": "State the goal of the `timeCompare(byte, short, short, byte, short)` method of the `SuspendUtil` class in the `uicc.suspendresume` package.",
+        "completion": "This method compares two provided times `Time1` (composed of `TimeUnit1` and `TimeValue1` ) and `Time2` (composed of `TimeUnit2` and `TimeValue2` ) according to the comparison method requested encoded in `CompareOperation`.\n\nReturns: - `true` for comparison method `COMPARE_IS_EQUAL` if Time1 and Time2 are equal.\n- `true` for comparison method `COMPARE_IS_LOWER` if Time1 is strictly lower than Time2.\n- `true` for comparison method `COMPARE_IS_HIGHER` if Time1 is strictly higher than Time2.\n- `true` for comparison method `COMPARE_IS_NOT_EQUAL` if the values are not equal.\n\nThrows:\n- `SuspendException` - with the following reason codes:\n- `UNEXPECTED_TIME_UNIT` if either `TimeUnit1` or `TimeUnit2` or both are not defined in `SuspendConstants` \n- `UNEXPECTED_COMPARE` if `CompareOperation` is not defined in `SuspendConstants`"
+    },
+    {
+        "prompt": "State the goal of the `HANDLER_NOT_AVAILABLE` field of the `ToolkitException` exception in the `uicc.toolkit` package.",
+        "completion": "This reason code (= 2) is used to indicate that the Handler is not available (e.g. busy)."
+    },
+    {
+        "prompt": "What is the objective of the `select(short)` method of the `FileView` interface in the `uicc.access` package?",
+        "completion": "This method selects a file of the UICC file system or of an ADF file system. The file search starts at the current DF of the FileView according to the file search method described in TS 102 221. The file context associated with the FileView object is changed after successful execution. This SELECT method allows to update the current file without handling the Select Response.\n\nThrows:\n- `UICCException` - in case of error\n- `FILE_NOT_FOUND` \n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `CONDITIONS_OF_USE_NOT_SATISFIED`"
+    },
+    {
+        "prompt": "What is the function of the `TAG_LOCATION_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Location Status tag = 0x1B"
+    },
+    {
+        "prompt": "What is the `IDX_TERMINAL_APPLICATIONS` field of the `TerminalProfile` class in the `uicc.toolkit` package intended for?",
+        "completion": "Proactive UICC: TERMINAL APPLICATIONS = 234"
+    },
+    {
+        "prompt": "What is the objective of the `uicc.toolkit.test` package?",
+        "completion": "This package provides the means for the toolkit applets to register to test events defined for the UICC in REL-18.\nThe Package Application Identifier (AID) format is defined in TS 101 220"
+    },
+    {
+        "prompt": "What is the `increase(byte[], short, short, byte[], short)` method of the `FileView` interface in the `uicc.access` package used for?",
+        "completion": "This method increases the current cyclic EF record, as defined in TS 102 221.In addition to the behaviour defined in TS 102 221, the following rule applies: If the parameter incrLength is set to 0, the current value of the last increased or updated record is stored into the oldest record of the current cyclic EF. The record pointer is set to the oldest record and this record becomes record number 1. The response buffer will contain the value of the increased record.\n\nNotes:\n- If `incrOffset` or `incrLength` or `respOffset` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `incrOffset+incrLength` is greater than `increase.length`, the length of the `increase` array an `ArrayIndexOutOfBoundsException` exception is thrown and no increase is performed.\n- If `respOffset` is greater than `response.length`, the length of the `response` array a `ArrayIndexOutOfBoundsException` exception is thrown and no increase is performed.\n\nReturns: length of the valid data in the resp buffer\n\nThrows:\n- `java.lang.NullPointerException` - if `incr` or `resp` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if increasing would cause access of data outside array bounds\n- `UICCException` - in case of error\n- `NO_EF_SELECTED` \n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REF_DATA_INVALIDATED` \n- `RECORD_NOT_FOUND` \n- `MAX_VALUE_REACHED` \n- `COMMAND_NOT_ALLOWED` if the referenced file is terminated"
+    },
+    {
+        "prompt": "Explain the role of the `TAG_TIMER_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Timer Identifier tag = 0x24"
+    },
+    {
+        "prompt": "Explain the role of the `uicc.access.fileadministration` package.",
+        "completion": "This package provides the means to the applets to perform file administrative functions as defined in the TS 102 222 specification."
+    },
+    {
+        "prompt": "What is the function of the `COMMAND_INCOMPATIBLE` field of the `UICCException` exception in the `uicc.access` package?",
+        "completion": "This reason code (= 2) is used to indicate that the method is not compatible with the selected file."
+    },
+    {
+        "prompt": "What is the objective of the `IDX_STYLE_TEXT_FOREGROUND_COLOUR` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Text Attribute: Style Text Colour = 229"
+    },
+    {
+        "prompt": "What is the `throwIt(short)` method of the `AdminException` exception in the `uicc.access.fileadministration` package intended for?",
+        "completion": "Throws the JCRE instance of AdminException with the specified reason.\n\nThrows:\n- `AdminException` - always"
+    },
+    {
+        "prompt": "What does the `EVENT_NOT_SUPPORTED` field of the `ToolkitException` exception in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "This reason code (= 6) is used to indicate that the event code is not supported by the CAT Runtime Environment"
+    },
+    {
+        "prompt": "What is the `select(short)` method of the `FileView` interface in the `uicc.access` package used for?",
+        "completion": "This method selects a file of the UICC file system or of an ADF file system. The file search starts at the current DF of the FileView according to the file search method described in TS 102 221. The file context associated with the FileView object is changed after successful execution. This SELECT method allows to update the current file without handling the Select Response.\n\nThrows:\n- `UICCException` - in case of error\n- `FILE_NOT_FOUND` \n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `CONDITIONS_OF_USE_NOT_SATISFIED`"
+    },
+    {
+        "prompt": "State the purpose of the `EVENT_EVENT_DOWNLOAD_NETWORK_SEARCH_MODE_CHANGE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event: Event Network Search Mode Change = 28"
+    },
+    {
+        "prompt": "State the significance of the `EVENT_EVENT_DOWNLOAD_CALL_CONNECTED` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Event Download - Call connected type = 13"
+    },
+    {
+        "prompt": "What is the function of the `IDX_SECURE_CONTAINER_AND_SESSION_CONTROL` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC: Security for Profile Container, Envelope Container, COMMAND CONTAINER and ENCAPSULATED SESSION CONTROL = 253"
+    },
+    {
+        "prompt": "State the goal of the `DEV_ID_TERMINAL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Device Identity : Terminal = 0x82"
+    },
+    {
+        "prompt": "What does the `TIME_UNIT_MINUTES` field of the `SuspendConstants` interface in the `uicc.suspendresume` package help to achieve?",
+        "completion": "Time Unit : minutes = 1"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_ALIGNMENT_RIGHT` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Text Attribute: Alignment Right = 218"
+    },
+    {
+        "prompt": "What does the `IDX_PROACTIVE_UICC_GET_INKEY_HELP_SUPPORTED` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Proactive UICC Get Inkey Help Supported index = 137"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_CAT_SERVICE_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : CAT service list tag = 0x12"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_FCP_LCS_INTEGER` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Tag in FCP TLV structure: Life Cycle Status Information = 0x8A"
+    },
+    {
+        "prompt": "What is the function of the `getGeneralResult()` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Returns the general result byte of the Proactive command. If the element is available it becomes the TLV selected, else no TLV selected.\n\nReturns: general result of the command (first byte of Result TLV in Terminal Response)\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Result TLV element\n- `OUT_OF_TLV_BOUNDARIES` if the general result byte is missing in the Result Comprehension TLV"
+    },
+    {
+        "prompt": "What is the `RES_ERROR_REQ_VALUES_MISS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "General Result : required values are missing = 0x36"
+    },
+    {
+        "prompt": "What is the `getTheUICCView(byte)` method of the `UICCSystem` class in the `uicc.access` package intended for?",
+        "completion": "Method to get a reference to a FileView object on the UICC file system The FileView object will only allow access to the files specified under the MF of the UICC. It is not possible to get access to files which are located under any ADF with this FileView object. After a succesful invocation of the method the MF is the current selected file. This method return `null` if the `Applet.register()` has not yet been invoked or the filesystem server returns `null`\n\nReturns: a reference to a class which implements the FileView interface\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if event is not a valid event code.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "What does the `TAG_DEVICE_FILTER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV : Device Filter = 0x42"
+    },
+    {
+        "prompt": "State the goal of the `IDX_EVENT_CALL_DISCONNECTED` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Event Call Disconnected index = 35"
+    },
+    {
+        "prompt": "What does the `EVENT_TEST_RX_APDU` field of the `ToolkitTestConstants` interface in the `uicc.toolkit.test` package serve to accomplish?",
+        "completion": "Test Specific EVENT_TEST_EXTERNAL_FILE_READ"
+    },
+    {
+        "prompt": "Explain the role of the `copyAdditionalInformation(byte[], short, short)` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Copies a part of the additional information field from the first Result TLV element of the current response data field. If the element is available it becomes the TLV selected, else no TLV is selected.\n\nReturns: `dstOffset+dstLength`\n\nThrows:\n- `java.lang.NullPointerException` - if `dstBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `dstOffset` or `dstLength` or both would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Result TLV element\n- `OUT_OF_TLV_BOUNDARIES` if `dstLength` is greater than the value field of the available TLV"
+    },
+    {
+        "prompt": "State the purpose of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "TheUICCConstants interfacehold all the constants defined in TS 102.221"
+    },
+    {
+        "prompt": "What does the `SuspendMechanism` interface in the `uicc.suspendresume` package help to achieve?",
+        "completion": "Provides callbacks to applet to behave with suspension mechanism. The interface `uicc.suspendresume.SuspendMechanism` provides a callback interface for applets to be notified by the UICC Runtime Environment about suspension operations. An applet Class (which extends the `javacard.framework.Applet` class) must implement this interface if their instances needs to be involved for suspension and resume operations."
+    },
+    {
+        "prompt": "What does the `RES_CMD_PERF_REFRESH_ADD_EF_READ` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "General Result : REFRESH performed with additional EFs read = 0x03"
+    },
+    {
+        "prompt": "What is the `TAG_ACCESS_TECHNOLOGY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Comprehension-TLV : Access Technology Tag = 0x3F"
+    },
+    {
+        "prompt": "What does the `makeHighUpdateBooleanArray(short)` method of the `HighUpdateArrayBuilder` interface in the `uicc.services.highupdatearray` package serve to accomplish?",
+        "completion": "Create a persistent `boolean` array with the specified array length and with extended endurance in terms of update operations with respect to arrays created by means of the Java `new` keyword.\n\nReturns: the new high update boolean array\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason code:\n- `SystemException.NO_RESOURCE` if there are not enough resources in the card to allocate the array\n- `java.lang.NegativeArraySizeException` - if the length parameter is negative"
+    },
+    {
+        "prompt": "State the significance of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_LANGUAGE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Provide Local Information Language index = 67"
+    },
+    {
+        "prompt": "What does the `TAG_FCP_SECURITY_ATTRIBUTE_EF` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "TAG in FCP TLV structure: Security attributes Expanded Format = 0xAB"
+    },
+    {
+        "prompt": "What does the `TERMINAL_PROFILE_NOT_AVAILABLE` field of the `ToolkitException` exception in the `uicc.toolkit` package help to achieve?",
+        "completion": "This reason code (= 9) is used to indicate that the Terminal Profile data are not available"
+    },
+    {
+        "prompt": "State the goal of the `copy(short, byte[], short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Copies a part of the handset profile in a buffer. The values outside the TerminalProfile data available are considered to bet set to 0.\n\nNotes:\n- If `dstOffset` or `dstLength` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown and no copy is performed.\n- If `dstOffset+dstLength` is greater than `dstBuffer.length`, the length of the `dstBuffer` array an `ArrayIndexOutOfBoundsException` exception is thrown and no copy is performed.\n\nReturns: dstOffset + dstLength\n\nThrows:\n- `java.lang.ArrayIndexOutOfBoundsException` - if copy would cause access of data outside array bounds\n- `java.lang.NullPointerException` - if `dstBuffer` is null\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available\n- BAD_INPUT_PARAMETER if the `startOffset` is negative"
+    },
+    {
+        "prompt": "What does the `RECORD_NOT_FOUND` field of the `UICCException` exception in the `uicc.access` package help to achieve?",
+        "completion": "This reason code (= 9) is used to indicate to the calling applet that no record was found."
+    },
+    {
+        "prompt": "State the goal of the `EVENT_EVENT_DOWNLOAD_CARD_READER_STATUS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Event Download - Card Reader Status = 18"
+    },
+    {
+        "prompt": "State the significance of the `RES_CMD_PERF_MISSING_INFO` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "General Result : command performed with missing information = 0x02"
+    },
+    {
+        "prompt": "What is the `RES_CMD_PERF_LIMITED_SERVICE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "General Result : command performed successfully limited service = 0x06"
+    },
+    {
+        "prompt": "State the purpose of the `getTheUICCView(byte)` method of the `UICCSystem` class in the `uicc.access` package.",
+        "completion": "Method to get a reference to a FileView object on the UICC file system The FileView object will only allow access to the files specified under the MF of the UICC. It is not possible to get access to files which are located under any ADF with this FileView object. After a succesful invocation of the method the MF is the current selected file. This method return `null` if the `Applet.register()` has not yet been invoked or the filesystem server returns `null`\n\nReturns: a reference to a class which implements the FileView interface\n\nThrows:\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if event is not a valid event code.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "What is the function of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "`ToolkitConstants` encapsulates constants related to the Toolkit Applets."
+    },
+    {
+        "prompt": "State the purpose of the `IDX_PROACTIVE_UICC_SERVICE_SEARCH` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Service Search index = 93"
+    },
+    {
+        "prompt": "What does the `throwIt(short)` method of the `AdminException` exception in the `uicc.access.fileadministration` package help to achieve?",
+        "completion": "Throws the JCRE instance of AdminException with the specified reason.\n\nThrows:\n- `AdminException` - always"
+    },
+    {
+        "prompt": "What is the function of the `TAG_BEARER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Bearer TAG = 0x32"
+    },
+    {
+        "prompt": "What is the `EVENT_CALL_CONTROL_BY_NAA` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Event : Call Control by NAA = 9"
+    },
+    {
+        "prompt": "What is the function of the `deleteData(int)` method of the `BERTLVFileView` interface in the `uicc.access.bertlvfile` package?",
+        "completion": "This method deletes a data object in the current BER-TLV structure EF.\n\nNotes:\n- After a successful call to this method, current TAG pointer and current offset in the data object are undefined\n- When deleting a non existent tag the bahaviour is implementation specific. The execution may be successful or the method may throw a `UICCException` with reason code `REFERENCED_DATA_NOT_FOUND` or `INVALID_TAG_VALUE` \n- If `tag` value is invalid or is equal to '5C', a `UICCException` with reason code `INVALID_TAG_VALUE` is thrown\n\nThrows:\n- `UICCException` - in case of error\n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REFERENCED_DATA_NOT_FOUND` \n- `CONDITIONS_OF_USE_NOT_SATISFIED` \n- `NO_EF_SELECTED` \n- `INVALID_TAG_VALUE`"
+    },
+    {
+        "prompt": "State the significance of the `REC_ACC_MODE_NEXT` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Record access mode: NEXT = 0x02"
+    },
+    {
+        "prompt": "What is the `NO_EF_SELECTED` field of the `UICCException` exception in the `uicc.access` package used for?",
+        "completion": "This reason code (= 1) is used to indicate that no EF is selected to complete the called method."
+    },
+    {
+        "prompt": "What does the `IDX_IRDA` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "IRDA index = 99"
+    },
+    {
+        "prompt": "What does the `TLV_LENGTH_CODED_2BYTES` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Value of a TLV Length field's first byte in TLV with a Value field is greater than 127 bytes = 0x81"
+    },
+    {
+        "prompt": "What is the `check(byte[], short, short)` method of the `TerminalProfile` class in the `uicc.toolkit` package used for?",
+        "completion": "Checks a set of facilities in the handset profile. The method checks all the facilities corresponding to bits set to 1 in the mask buffer.\n\nNotes:\n- If `offset` or `length` parameter is negative an `ArrayIndexOutOfBoundsException` exception is thrown and no check is performed.\n- If `offset+length` is greater than `mask.length`, the length of the `mask` array an `ArrayIndexOutOfBoundsException` exception is thrown and no check is performed.\n\nReturns: true if the bitwise AND of the TerminalProfile data padded with 0 and the `mask` is equal to the `mask`, false otherwise. If `length` is equal to `0`, true is returned.\n\nThrows:\n- `java.lang.NullPointerException` - if `mask` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if check would cause access of data outside mask array bounds\n- `ToolkitException` - with the following reason codes:\n- TERMINAL_PROFILE_NOT_AVAILABLE if Terminal Profile data are not available"
+    },
+    {
+        "prompt": "State the significance of the `TAG_LAST_ENVELOPE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Last Envelope tag = 0x70"
+    },
+    {
+        "prompt": "What does the `IDX_EVENT_CALL_CONNECTED` field of the `TerminalProfile` class in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Event Call Connected index = 34"
+    },
+    {
+        "prompt": "What does the `EVENT_PROACTIVE_HANDLER_AVAILABLE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Event: Proactive Handler Available = 123"
+    },
+    {
+        "prompt": "State the purpose of the `CONDITIONS_OF_USE_NOT_SATISFIED` field of the `AdminException` exception in the `uicc.access.fileadministration` package.",
+        "completion": "This reason code (=3) is used to indicate that the conditions of use are not satisfied."
+    },
+    {
+        "prompt": "What does the `FID_EF_SMSR` field of the `UICCConstants` interface in the `uicc.access` package help to achieve?",
+        "completion": "File identifier : EF SMSR = 0x6F47 (under DF TELECOM)"
+    },
+    {
+        "prompt": "State the purpose of the `FID_EF_DIR` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : Directory File EF_DIR = 0x2F00"
+    },
+    {
+        "prompt": "State the goal of the `IDX_GET_FRAMES_STATUS` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Get Frames Status = 177"
+    },
+    {
+        "prompt": "What is the `DEV_ID_ADDITIONAL_CARD_READER_2` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Device Identity : Additional Card Reader 2 = 0x12"
+    },
+    {
+        "prompt": "What is the function of the `TAR_NOT_DEFINED` field of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This reason code (=18) is used to indicate that there is no TAR defined for the applet instance."
+    },
+    {
+        "prompt": "What is the `ProactiveHandler` interface in the `uicc.toolkit` package intended for?",
+        "completion": "This interface is the basic class for the definition ofProactive commands. Low level methods, as `init()`, `appendTLV()`... will be used to handle generic Proactive commands (standard or future definitions...). The ProactiveHandler class is aTemporary JCRE Entry Point Object. The Toolkit Applets, which need to send Proactive commands, shall call the `getTheHandler()` static method to get the reference of this system instance."
+    },
+    {
+        "prompt": "What is the `OUT_OF_FILE_BOUNDARIES` field of the `UICCException` exception in the `uicc.access` package intended for?",
+        "completion": "This reason code (= 7) is used to indicate that either the length, the file offset or both passed to the called method are out of the current file boundaries."
+    },
+    {
+        "prompt": "Explain the role of the `TAG_FCP_SECURITY_ATTRIBUTE_REF_EF` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": ""
+    },
+    {
+        "prompt": "What is the objective of the `init(byte, byte, byte)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Initializes the next Proactive command with Command Details and Device Identities TLV. The source device is always the UICC card. The command number is generated by the method. The Comprehension Required flags are set. After the method invocation no TLV is selected."
+    },
+    {
+        "prompt": "What is the function of the `TLV_FOUND_CR_SET` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "findTLV method result : if TLV is found with CR set = 0x01"
+    },
+    {
+        "prompt": "State the goal of the `TAG_RESULT` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Result tag = 0x03"
+    },
+    {
+        "prompt": "Explain the role of the `getTheAdminFileView(byte[], short, byte, byte)` method of the `AdminFileViewBuilder` class in the `uicc.access.fileadministration` package.",
+        "completion": "Method to get a reference to a AdminFileView object on an ADF file system server. The AdminFileView object will only allow access to Files under the ADF specified by the AID. It is not possible to access files which are not located under the ADF. After a successful invocation of the method the ADF is the currently selected file. This method return `null` if the `Applet.register()` has not yet been invoked, or the filesystem server does not exist or the filesystem server returns `null` \n\nNotes:\n- If `bOffset` or `bLength` is negative an `ArrayIndexOutOfBoundsException` exception is thrown.\n- If `bOffset+bLength` is greater than `buffer.length`, the length of the `buffer` array an `ArrayIndexOutOfBoundsException` exception is thrown.\n\nReturns: a reference to an object which implements the AdminFileView interface\n\nThrows:\n- `java.lang.NullPointerException` - if `buffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - in case of access outside array bounds\n- `javacard.framework.SystemException` - with the following reason codes:\n- `SystemException.ILLEGAL_VALUE` if bType is not a valid value or `bLength` is not in the range of 5 - 16 bytes.\n- `SystemException.NO_TRANSIENT_SPACE` if sufficient transient space is not available.\n- `SystemException.ILLEGAL_TRANSIENT` if the current applet context is not the currently selected applet context and `CLEAR_ON_DESELECT` is specified."
+    },
+    {
+        "prompt": "What is the objective of the `RES_CMD_PERF_BACKWARD_MOVE_REQ` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "General Result : command performed backward move requested = 0x11"
+    },
+    {
+        "prompt": "What is the `PRO_CMD_MORE_TIME` field of the `ToolkitConstants` interface in the `uicc.toolkit` package intended for?",
+        "completion": "Type of proactive command : MORE TIME = 0x02"
+    },
+    {
+        "prompt": "State the significance of the `IDX_EVENT_CALL_DISCONNECTED` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Event Call Disconnected index = 35"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_PROACTIVE_UICC_PROVIDE_LOCAL_INFORMATION_LANGUAGE` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC Provide Local Information Language index = 67"
+    },
+    {
+        "prompt": "State the significance of the `TAG_CONTACTLESS_FUNCTIONALITY_STATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: Contactless functionality state tag = 0x54"
+    },
+    {
+        "prompt": "What does the `IDX_REFRESH_eUICC_PROFILE_OPERATION` field of the `TerminalProfile` class in the `uicc.toolkit` package help to achieve?",
+        "completion": "Support of eUICC Profile Operation = (short)271;"
+    },
+    {
+        "prompt": "What does the `TAG_FRAMES_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Comprehension-TLV: Frames Identifier tag = 0x68"
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROACTIVE_UICC_GET_INKEY_HELP_SUPPORTED` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Get Inkey Help Supported index = 137"
+    },
+    {
+        "prompt": "What does the `TAG_ENCRYPTED_TLV_LIST` field of the `ToolkitConstants` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Comprehension-TLV: Encrypted TLV list = 0x22"
+    },
+    {
+        "prompt": "State the purpose of the `TAG_FCP_FILE_PROPRIETARY_INFO` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Tag in FCP TLV structure: Proprietary information = 0xA5"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_TERMINAL_APPLICATIONS` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Proactive UICC: TERMINAL APPLICATIONS = 234"
+    },
+    {
+        "prompt": "What is the function of the `REFERENCED_DATA_NOT_FOUND` field of the `UICCException` exception in the `uicc.access` package?",
+        "completion": "This reason code (=15) is used to indicate to the calling applet that the referenced data cannot be found."
+    },
+    {
+        "prompt": "State the significance of the `appendTLV(byte, short, short)` method of the `EditHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Appends a TLV element to the current TLV list (4-byte element(2-short)) This method is useful to add three byte elements as Text Attribute, ESN, or C-APDU. A successful append does not modify the TLV selected.\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_OVERFLOW` if the EditHandler buffer is to small to append the requested data\n- `HANDLER_NOT_AVAILABLE` if the handler is busy"
+    },
+    {
+        "prompt": "What is the objective of the `DEV_ID_ADDITIONAL_CARD_READER_3` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Device Identity : Additional Card Reader 3 = 0x13"
+    },
+    {
+        "prompt": "What is the function of the `FID_EF_ADN` field of the `UICCConstants` interface in the `uicc.access` package?",
+        "completion": "File identifier : EF ADN = 0x6F3A (under DF TELECOM)"
+    },
+    {
+        "prompt": "What is the objective of the `TAG_ITEM` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Item tag = 0x0F"
+    },
+    {
+        "prompt": "What is the `TAG_CALLED_PARTY_SUBADDRESS` field of the `ToolkitConstants` interface in the `uicc.toolkit` package used for?",
+        "completion": "Comprehension-TLV : Called Party Subaddress tag = 0x08"
+    },
+    {
+        "prompt": "State the significance of the `EVENT_EVENT_DOWNLOAD_USER_ACTIVITY` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Event : Event Download - User activity type = 16"
+    },
+    {
+        "prompt": "State the goal of the `IDX_SETUP_CALL` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Proactive UICC Setup Call index = 62"
+    },
+    {
+        "prompt": "What does the `UNEXPECTED_TIME_UNIT` field of the `SuspendException` exception in the `uicc.suspendresume` package help to achieve?",
+        "completion": "This reason code (= 1) is used to indicate that the time unit format is not recognized because the value is not defined in `SuspendConstants`."
+    },
+    {
+        "prompt": "Explain the role of the `TAG_IMEISV` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV: IMEISV = 0x62"
+    },
+    {
+        "prompt": "State the goal of the `IDX_PROVIDE_LOCAL_INFORMATION_BATTERY_STATE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Provide Local Information (Battery State) = 169"
+    },
+    {
+        "prompt": "What does the `select(byte)` method of the `FileView` interface in the `uicc.access` package serve to accomplish?",
+        "completion": "This method selects a file by SFI in the current directory of the FileView.\nThe file context associated with the FileView object is changed after successful execution. This SELECT method allows to update the current file without handling the Select Response.\n\nThrows:\n- `UICCException` - in case of error\n- `FILE_NOT_FOUND` if a file with the corresponding SFI is not found or if the `sfi` parameter is invalid.\n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `CONDITIONS_OF_USE_NOT_SATISFIED`"
+    },
+    {
+        "prompt": "What is the function of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This class extends the `Throwable` class and allows the classes of this package to throw specific exceptions in case of problems."
+    },
+    {
+        "prompt": "State the purpose of the `compareValue(short, byte[], short, short)` method of the `ViewHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Compares the last found TLV element with a buffer.\n\nReturns: the result of the comparison as follows:\n- `0` if identical\n- `-1` if the first miscomparing byte in Comprehension TLV List is less than that in `compareBuffer`,\n- `1` if the first miscomparing byte in Comprehension TLV List is greater than that in `compareBuffer`.\n\nThrows:\n- `java.lang.NullPointerException` - if `compareBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `compareOffset` or `compareLength` or both would cause access outside array bounds, or if `compareLength` is negative.\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element\n- `OUT_OF_TLV_BOUNDARIES` if `valueOffset`, `compareLength` or both are out of the current TLV"
+    },
+    {
+        "prompt": "What is the function of the `TAG_BROWSER_TERMINATION` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Browser Termination Cause Tag = 0x34"
+    },
+    {
+        "prompt": "Explain the role of the `FID_DF_TELECOM` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : DF TELECOM = 0x7F10"
+    },
+    {
+        "prompt": "State the purpose of the `IDX_DNS_SERVER_ADDRESS_OPEN_CHANNEL` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Support for DNS server address request for OPEN CHANNEL for packet data service bearer = 256"
+    },
+    {
+        "prompt": "What is the `getTheHandler()` method of the `EnvelopeResponseHandlerSystem` class in the `uicc.toolkit` package intended for?",
+        "completion": "Returns the single system instance of the `EnvelopeResponseHandler` class. The Applet shall get the reference of the handler at its triggering, the beginning of the processToolkit method.\n\nReturns: reference of the temporary JCRE entry point object of the EnvelopeResponseHandler\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is not available."
+    },
+    {
+        "prompt": "What does the `AdminException(short)` constructor of the `AdminException` exception in the `uicc.access.fileadministration` package serve to accomplish?",
+        "completion": "Constructs a AdminException with the specified reason. To conserve on resources use `throwIt()` to use the JCRE instance of this class."
+    },
+    {
+        "prompt": "Explain the role of the `TAG_CHANNEL_DATA_LENGTH` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Comprehension-TLV : Channel Data Length Tag = 0x37"
+    },
+    {
+        "prompt": "What is the objective of the `IDX_MULTI_MEDIA_CALL_IN_SET_UP_CALL` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Multi-media Call in SET UP CALL = 171"
+    },
+    {
+        "prompt": "What does the `allocateServiceIdentifier()` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Allocate a Service identifier that the applet can manage.\nBy calling this method the applet is registered to the EVENT_EVENT_ DOWNLOAD_LOCAL_CONNECTION of the allocated service.\nThe service identifier is allocated by the applet until it explicitly releases it. It can then issue the proactive command DECLARE SERVICE to add or delete a service to the terminal service database.\n\nReturns: the identifier of the Service allocated to the applet\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- NO_SERVICE_ID_AVAILABLE if all the services are allocated or the maximum number of services Identifiers have been allocated to this applet\n- `javacard.framework.TransactionException`"
+    },
+    {
+        "prompt": "What is the `select(short)` method of the `FileView` interface in the `uicc.access` package intended for?",
+        "completion": "This method selects a file of the UICC file system or of an ADF file system. The file search starts at the current DF of the FileView according to the file search method described in TS 102 221. The file context associated with the FileView object is changed after successful execution. This SELECT method allows to update the current file without handling the Select Response.\n\nThrows:\n- `UICCException` - in case of error\n- `FILE_NOT_FOUND` \n- `MEMORY_PROBLEM` \n- `INTERNAL_ERROR` \n- `CONDITIONS_OF_USE_NOT_SATISFIED`"
+    },
+    {
+        "prompt": "What is the function of the `TAG_BATTERY_STATE` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV: Battery State tag = 0x63"
+    },
+    {
+        "prompt": "What is the function of the `UICCSystemException(short)` constructor of the `UICCSystemException` exception in the `uicc.system` package?",
+        "completion": "Construct a `UICCSystemException` instance with the specified reason. To conserve on resources use `throwIt()` method to re-use the JCRE instance of this class."
+    },
+    {
+        "prompt": "What is the `TIME_UNIT_HOURS` field of the `SuspendConstants` interface in the `uicc.suspendresume` package intended for?",
+        "completion": "Time Unit : hours = 2"
+    },
+    {
+        "prompt": "State the goal of the `FID_EF_ARR` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "File identifier : Access Rule Reference EF_ARR = 0x2F06"
+    },
+    {
+        "prompt": "State the purpose of the `ENHANCED_SEARCH` field of the `UICCConstants` interface in the `uicc.access` package.",
+        "completion": "Enhanced search"
+    },
+    {
+        "prompt": "State the purpose of the `IDX_TEXT_ATTRIBUTE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Text Attribute index = 123"
+    },
+    {
+        "prompt": "State the significance of the `changeMenuEntry(byte, byte[], short, short, byte, boolean, byte, short)` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package.",
+        "completion": "Changes the value of a menu entry. The default state of the changed menu entry is 'enabled'. The value of the `helpSupported` boolean parameter defines the registration status of the EVENT_MENU_SELECTION_HELP_REQUEST event. The icon identifier provided will be added to the icon identifier list of the item icon identifier list Comprehension TLV if all the applets registered to the EVENT_MENU_SELECTION provide it. The Icon list qualifier transmitted to the Terminal will be 'icon is not self explanatory' if one of the applet registered prefers this qualifier. After the invocation of this method, during the current card session, the CAT Runtime Environment shall dynamically update the menu stored in the Terminal.\n\nThrows:\n- `java.lang.NullPointerException` - if `menuEntry` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `offset` or `length` or both would cause access outside array bounds\n- `ToolkitException` - with the following reason codes:\n- MENU_ENTRY_NOT_FOUND if the menu entry does not exist for this applet\n- ALLOWED_LENGTH_EXCEEDED if the menu entry string is bigger than the allocated space\n- `javacard.framework.TransactionException` - if the operation would cause the commit capacity to be exceeded"
+    },
+    {
+        "prompt": "What is the `SIMPLE_SEARCH_START_BACKWARD` field of the `UICCConstants` interface in the `uicc.access` package intended for?",
+        "completion": "Search mode backward beginning at the given record number"
+    },
+    {
+        "prompt": "What is the objective of the `getSize()` method of the `BERTLVViewHandler` interface in the `uicc.toolkit` package?",
+        "completion": "Returns the BER TLV size, this includes the tag and the length. The length of the TLV list can be retrieved with the ViewHandler.getLength() method.\n\nReturns: the size of the BER TLV structure"
+    },
+    {
+        "prompt": "State the significance of the `ProactiveHandler` interface in the `uicc.toolkit` package.",
+        "completion": "This interface is the basic class for the definition ofProactive commands. Low level methods, as `init()`, `appendTLV()`... will be used to handle generic Proactive commands (standard or future definitions...). The ProactiveHandler class is aTemporary JCRE Entry Point Object. The Toolkit Applets, which need to send Proactive commands, shall call the `getTheHandler()` static method to get the reference of this system instance."
+    },
+    {
+        "prompt": "What is the objective of the `EVENT_EVENT_DOWNLOAD_MT_CALL` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Event : Event Download - MT call type = 12"
+    },
+    {
+        "prompt": "State the goal of the `IDX_FONT_SIZE_LARGE` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "Text Attribute: Font Size Large = 220"
+    },
+    {
+        "prompt": "What does the `getValueLength()` method of the `ViewHandler` interface in the `uicc.toolkit` package serve to accomplish?",
+        "completion": "Gets the binary length of the value field for the last TLV element which has been found in the handler.\n\nReturns: length of the value field\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `UNAVAILABLE_ELEMENT` in case of unavailable TLV element"
+    },
+    {
+        "prompt": "State the goal of the `initCloseChannel(byte)` method of the `ProactiveHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Builds a Close Channel Proactive command without sending the command. The Comprehension Required flags are all set to 1. After the method invocation no TLV is selected."
+    },
+    {
+        "prompt": "What is the `throwIt(short)` method of the `ToolkitException` exception in the `uicc.toolkit` package intended for?",
+        "completion": "Throws the JCRE instance of the `ToolkitException` class with the specified reason.\n\nThrows:\n- `ToolkitException` - always"
+    },
+    {
+        "prompt": "What is the function of the `IDX_VARIABLE_SIZE_FONTS` field of the `TerminalProfile` class in the `uicc.toolkit` package?",
+        "completion": "Variable Size Fonts index = 119"
+    },
+    {
+        "prompt": "State the goal of the `throwIt(short)` method of the `UICCSystemException` exception in the `uicc.system` package.",
+        "completion": "Throws the JCRE instance of the `UICCSystemException` class with the specified reason.\n\nThrows:\n- `UICCSystemException` - always"
+    },
+    {
+        "prompt": "What does the `RES_ERROR_CMD_BEYOND_TERMINAL_CAPAB` field of the `ToolkitConstants` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "General Result : command beyond terminal's capabilities = 0x30"
+    },
+    {
+        "prompt": "State the purpose of the `BAD_INPUT_PARAMETER` field of the `ToolkitException` exception in the `uicc.toolkit` package.",
+        "completion": "This reason code (=14) is used to indicate that an input parameter of the method is not valid"
+    },
+    {
+        "prompt": "State the purpose of the `SECURITY_STATUS_NOT_SATISFIED` field of the `UICCException` exception in the `uicc.access` package.",
+        "completion": "This reason code (= 3) is used to indicate that access conditions are not satisfied."
+    },
+    {
+        "prompt": "State the significance of the `IDX_UCS2_ENTRY` field of the `TerminalProfile` class in the `uicc.toolkit` package.",
+        "completion": "UCS2 Entry index = 13"
+    },
+    {
+        "prompt": "What is the `deleteData(int)` method of the `BERTLVFileView` interface in the `uicc.access.bertlvfile` package used for?",
+        "completion": "This method deletes a data object in the current BER-TLV structure EF.\n\nNotes:\n- After a successful call to this method, current TAG pointer and current offset in the data object are undefined\n- When deleting a non existent tag the bahaviour is implementation specific. The execution may be successful or the method may throw a `UICCException` with reason code `REFERENCED_DATA_NOT_FOUND` or `INVALID_TAG_VALUE` \n- If `tag` value is invalid or is equal to '5C', a `UICCException` with reason code `INVALID_TAG_VALUE` is thrown\n\nThrows:\n- `UICCException` - in case of error\n- `INTERNAL_ERROR` \n- `COMMAND_INCOMPATIBLE` \n- `SECURITY_STATUS_NOT_SATISFIED` \n- `REFERENCED_DATA_NOT_FOUND` \n- `CONDITIONS_OF_USE_NOT_SATISFIED` \n- `NO_EF_SELECTED` \n- `INVALID_TAG_VALUE`"
+    },
+    {
+        "prompt": "State the purpose of the `PRO_CMD_RECEIVE_DATA` field of the `ToolkitConstants` interface in the `uicc.toolkit` package.",
+        "completion": "Type of proactive command : Receive Data = 0x42"
+    },
+    {
+        "prompt": "What does the `copy(byte[], short, short)` method of the `ViewHandler` interface in the `uicc.toolkit` package help to achieve?",
+        "completion": "Copies the Comprehension TLV list contained in the handler to the destination byte array.\n\nReturns: `dstOffset+dstLength`\n\nThrows:\n- `java.lang.NullPointerException` - if `dstBuffer` is `null`\n- `java.lang.ArrayIndexOutOfBoundsException` - if `dstOffset` or `dstLength` or both would cause access outside array bounds, or if `dstLength` is negative.\n- `ToolkitException` - with the following reason codes:\n- `HANDLER_NOT_AVAILABLE` if the handler is busy\n- `OUT_OF_TLV_BOUNDARIES` if `dstLength` is grater than the length of the Comprehension TLV List."
+    },
+    {
+        "prompt": "What is the objective of the `OUT_OF_TLV_BOUNDARIES` field of the `ToolkitException` exception in the `uicc.toolkit` package?",
+        "completion": "This reason code (= 8) is used to indicate that either the offset, the length or both are out of current TLV boundaries"
+    },
+    {
+        "prompt": "State the significance of the `getItemIdentifier()` method of the `ProactiveResponseHandler` interface in the `uicc.toolkit` package.",
+        "completion": "Returns the item identifier byte value from the first Item Identifier TLV element of the current response data field. If the element is available it becomes the TLV selected, else no TLV is selected.\n\nReturns: item identifier\n\nThrows:\n- `ToolkitException` - with the following reason codes:\n- `UNAVAILABLE_ELEMENT` in case of unavailable Item Identifier TLV element\n- `OUT_OF_TLV_BOUNDARIES` if the item identifier byte is missing in the Item Identifier Comprehension TLV"
+    },
+    {
+        "prompt": "State the purpose of the `COMMAND_NOT_ALLOWED` field of the `ToolkitException` exception in the `uicc.toolkit` package.",
+        "completion": "This reason code (=15) is used to indicate that the proactive command being sent is not allowed by the CAT Runtime Environment."
+    },
+    {
+        "prompt": "What is the function of the `getPollInterval()` method of the `ToolkitRegistry` interface in the `uicc.toolkit` package?",
+        "completion": "Returns the number of seconds of the adjusted duration for the calling Toolkit Applet. If the returned duration is equal to `POLL_NO_DURATION`, the Toolkit Applet is not registered to EVENT_STATUS_COMMAND event. The returned duration may :\n- be a multiple of the real adjusted poll interval time at the Terminal.\n- differ from the requested duration due to request of other toolkit applets or due to restrictions of the current Terminal.\n- be the poll interval duration that was determined with the POLL INTERVAL NEGOTIATION mechanism\n- be changed during the card session due requests from other Toolkit Applets\n- not correspond to the elapsed time due to additional STATUS commands send by the Terminal.\n\nReturns: the number of seconds of the adjusted duration for the applet"
+    },
+    {
+        "prompt": "What is the function of the `TAG_ITEM_IDENTIFIER` field of the `ToolkitConstants` interface in the `uicc.toolkit` package?",
+        "completion": "Comprehension-TLV : Item Identifier tag = 0x10"
+    },
+    {
+        "prompt": "What does the `TIME_UNIT_SECONDS` field of the `SuspendConstants` interface in the `uicc.suspendresume` package help to achieve?",
+        "completion": "Time Unit : seconds = 0"
+    }
+]

@@ -34,16 +34,22 @@ def evaluate_loss_perplexity(model_name: str,
     torch.cuda.empty_cache()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # load model
+    load_model_start_time = time.perf_counter()
+
+    print(f"loading {model_name} for lossper calculation.......")
     if is_finetuned:
         model_name = f'./{prefix_file_name}_{model_name}'
         evl_model = AutoPeftModelForCausalLM.from_pretrained(
             model_name).to(device)
     else:
         evl_model = AutoModelForCausalLM.from_pretrained(
-            model_name).to(device)
-        
+            model_name).to(device)   
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
+    load_model_end_time = time.perf_counter()
+    print(f"{model_name} takes {load_model_end_time - load_model_start_time} to load")
+
+    print(f"{model_name} loaded in {load_model_end_time - load_model_start_time}")
     evl_model.eval()
     total_loss = 0
     total_tokens = 0
@@ -143,7 +149,6 @@ def create_completion_dataset(model_name: str,
     else:
         evl_model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
     
-    print(f"Writing output to {file_name}")
     
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.eos_token)
@@ -155,6 +160,7 @@ def create_completion_dataset(model_name: str,
     
     res = []
 
+    print(f"Writing output to {file_name}")
     # Process dataset
     for example in dataset:
         # Tokenize prompt
@@ -266,18 +272,25 @@ def evaluate_rouge(model_name: str,
                                         Dataset |
                                         IterableDatasetDict |
                                         IterableDataset),
-                   is_finetuned: bool):
+                   is_finetuned: bool,
+                   rouge_type: str,
+                   threshold: int):
    
     '''
     Calculates the 4 different rouge scores of a model. 
-    Returns them as separate variables
+    returns number of prompt-completions that passed the threshold,
+    and the prompt-completions that failed
     '''
+    failed_prompts = []
+    failed_completions = []
+
     if is_finetuned:
         print(f"Evaluating Rouge Scores for finetuned {model_name}")
     else:
         print(f"Evaluating Rouge Scores for pretrained {model_name}")
     start_time = time.time()
     rouge = evaluate.load('rouge')
+    prompts = [p["prompt"] for p in dataset] # used to output the corresponding failed p-c 
     references = [r["completion"] for r in dataset]
     
     # opens file, location is different between finetuned and pretrained
@@ -294,17 +307,26 @@ def evaluate_rouge(model_name: str,
                     encoding='utf-8') as file:
             predictions = json.load(file)
         predictions = [r["completion"] for r in predictions]
-    # Rouge score calculations
-    rouge1 = rouge.compute(predictions=predictions,
-                                references=references)["rouge1"]
-    rouge2 = rouge.compute(predictions=predictions,
-                                references=references)["rouge2"]
-    rougeL = rouge.compute(predictions=predictions,
-                                references=references)["rougeL"]
-    rougeLsum = rouge.compute(predictions=predictions,
-                                references=references)["rougeLsum"]
+    
+    # Output a list of scores for each references
+    rouge_scores = rouge.compute(predictions=predictions,
+                                references=references,
+                                use_aggregator=False)[rouge_type]
+    
+    print(f"{model_name} Rouge Scores")
+    print(rouge_scores)
+
+    # calculate the rouge score of each completion
+    count_rouge_passes = 0
+    for i, rouge_score in enumerate(rouge_scores):
+        if rouge_score > threshold:
+            count_rouge_passes += 1
+        else:
+            # failed p-c to return
+            failed_prompts.append(prompts[i])
+            failed_completions.append(predictions[i])
     end_time = time.time()
     time_taken = end_time - start_time
     print(f"All rouge scores computed for {model_name} in {time_taken} seconds")
 
-    return rouge1, rouge2, rougeL, rougeLsum, time_taken
+    return count_rouge_passes, failed_prompts, failed_completions, time_taken

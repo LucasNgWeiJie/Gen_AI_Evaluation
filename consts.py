@@ -16,4 +16,6 @@ DATASET_FILENAME = './dataset/filtered_all_prompts.json'
 ASSERT_FILENAME = '../other_dataset/regex.json'
 PREFIX = 'models/finetuned'
 GRAPH_FILENAME_PREFIX = './eval_plots/'
+ROUGE_THRESHOLD = 0.2
+ROUGE_FAILED_PREFIX = './rouge_failures/'
 

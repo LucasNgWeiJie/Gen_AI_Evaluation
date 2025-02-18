@@ -19,8 +19,8 @@ def get_random_prompts(input_file, output_file, num_prompts):
 
 def main():
     input_file = 'all_prompts_uicc.json'  
-    output_file = 'filtered_prompts.json'  
-    num_prompts = 5
+    output_file = 'filtered500_prompts.json'  
+    num_prompts = 500
     
     get_random_prompts(input_file, output_file, num_prompts)
 
