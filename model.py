@@ -15,7 +15,7 @@ def create_model(model_name: str,
                  dataset_name: str = 'oracle_data.json',
                  prefix_file_name: str = 'finetuned'):
     '''
-    This function creates finetuned model
+    This function creates finetuned model by training the pretrained model on the dataset
     '''
     start_time = time.time()
     torch.cuda.empty_cache()

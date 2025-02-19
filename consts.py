@@ -12,10 +12,11 @@ FINETUNED_MODELS = [
     "Qwen 1.8B (FT)"
 ]
 
-DATASET_FILENAME = './dataset/filtered_all_prompts.json'
-ASSERT_FILENAME = '../other_dataset/regex.json'
-PREFIX = 'models/finetuned'
-GRAPH_FILENAME_PREFIX = './eval_plots/'
-ROUGE_THRESHOLD = 0.2
-ROUGE_FAILED_PREFIX = './rouge_failures/'
+DATASET_FILENAME = './dataset/filtered_all_prompts.json'   # Path to dataset file
+ASSERT_FILENAME = '../other_dataset/regex.json'   # Path to assert dataset file
+PREFIX = 'models/finetuned' # Prefix for finetuned model
+GRAPH_FILENAME_PREFIX = './eval_plots/'    # Path to save evaluation graph plots
+ROUGE_THRESHOLD = 0.2 # Rouge threshold for rouge score
+ROUGE_OUTPUT_PREFIX = './rouge_outputs/' # Path to save rouge outputs
+
 

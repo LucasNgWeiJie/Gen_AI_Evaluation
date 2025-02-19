@@ -230,17 +230,19 @@ def evaluate_all_rouge(data, is_finetuned: str, rouge_type: str, threshold: int)
     pretrained_rouge_scores = []
     pretrained_times = []
    
-    # Plot graph for rouge score 
     if is_finetuned == "finetuned":   
         for model in MODELS:
-            finetuned_rouge_score, failed_prompts, failed_completions, finetuned_time = evaluate_rouge(model, data, True, rouge_type, threshold)
+            finetuned_rouge_score, passed_prompts, passed_completions, failed_prompts, failed_completions, finetuned_time = evaluate_rouge(model, data, True, rouge_type, threshold)
             finetuned_rouge_scores.append(finetuned_rouge_score)
             finetuned_times.append(finetuned_time)
             print(f"-------------------------------------Writing outputs that failed rouge score{is_finetuned}_{model}-------------------------------------------")
             # Create a list of dictionaries with prompt and completion pairs
+            passed_outputs = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(passed_prompts, passed_completions)]
             failed_outputs = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts, failed_completions)]
             # Write the data to a JSON file
-            with open(ROUGE_FAILED_PREFIX + f'finetuned_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
+            with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougepassed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(passed_outputs, json_file, indent=4)
+            with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
                 json.dump(failed_outputs, json_file, indent=4)
         # plot graph for finetuned models
         print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
@@ -260,9 +262,12 @@ def evaluate_all_rouge(data, is_finetuned: str, rouge_type: str, threshold: int)
             pretrained_times.append(pretrained_time)
             print(f"-------------------------------------Writing outputs that failed rouge score{is_finetuned}_{model}-------------------------------------------")
             # Create a list of dictionaries with prompt and completion pairs
+            passed_outputs = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(passed_prompts, passed_completions)]
             failed_outputs = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts, failed_completions)]
             # Write the data to a JSON file
-            with open(ROUGE_FAILED_PREFIX + f'pretrained_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
+            with open(ROUGE_OUTPUT_PREFIX + f'pretrained_rougepassed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(passed_outputs, json_file, indent=4)
+            with open(ROUGE_OUTPUT_PREFIX + f'pretrained_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
                 json.dump(failed_outputs, json_file, indent=4)
         # plot for pretrained
         print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
@@ -277,26 +282,32 @@ def evaluate_all_rouge(data, is_finetuned: str, rouge_type: str, threshold: int)
 
     else:
         for model in MODELS:
-            finetuned_rouge_score, failed_prompts_ft, failed_completions_ft, finetuned_time = evaluate_rouge(model, data, True, rouge_type, threshold)
+            finetuned_rouge_score, passed_prompts_ft, passed_completions_ft, failed_prompts_ft, failed_completions_ft, finetuned_time = evaluate_rouge(model, data, True, rouge_type, threshold)
             finetuned_rouge_scores.append(finetuned_rouge_score)
             finetuned_times.append(finetuned_time)
 
-            pretrained_rouge_score, failed_prompts_pt, failed_completions_pt, pretrained_time = evaluate_rouge(model, data, False, rouge_type, threshold)
+            pretrained_rouge_score, passed_prompts_pt, passed_completions_pt, failed_prompts_pt, failed_completions_pt, pretrained_time = evaluate_rouge(model, data, False, rouge_type, threshold)
             pretrained_rouge_scores.append(pretrained_rouge_score)
             pretrained_times.append(pretrained_time)
 
-            print(f"-------------------------------------Writing outputs that failed rouge score finetuned_{model}-------------------------------------------")
-            # Create a list of dictionaries with prompt and completion pairs
-            failed_outputs_ft = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts_ft, failed_completions_ft)]
-            # Write the data to a JSON file
-            with open(ROUGE_FAILED_PREFIX + f'finetuned_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
-                json.dump(failed_outputs_ft, json_file, indent=4) 
-            print(f"-------------------------------------Writing outputs that failed rouge score pretrained_{model}-------------------------------------------")
-            # Create a list of dictionaries with prompt and completion pairs
+            print(f"-------------------------------------Writing outputs that passed/failed rouge score {is_finetuned}_{model}-------------------------------------------")
+            # writ for pretrained
+            passed_outputs_pt = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(passed_prompts_pt, passed_completions_pt)]
             failed_outputs_pt = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts_pt, failed_completions_pt)]
             # Write the data to a JSON file
-            with open(ROUGE_FAILED_PREFIX + f'pretrained_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
-                json.dump(failed_outputs_pt, json_file, indent=4)           
+            with open(ROUGE_OUTPUT_PREFIX + f'pretrained_rougepassed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(passed_outputs_pt, json_file, indent=4)
+            with open(ROUGE_OUTPUT_PREFIX + f'pretrained_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(failed_outputs_pt, json_file, indent=4)    
+
+            # write for finetuned  
+            passed_outputs_ft = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(passed_prompts_ft, passed_completions_ft)]
+            failed_outputs_ft = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts_ft, failed_completions_ft)]
+            # Write the data to a JSON file
+            with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougepassed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(passed_outputs, json_file, indent=4)
+            with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
+                json.dump(failed_outputs, json_file, indent=4)           
 
         # plot both
         print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")

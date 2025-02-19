@@ -281,6 +281,9 @@ def evaluate_rouge(model_name: str,
     returns number of prompt-completions that passed the threshold,
     and the prompt-completions that failed
     '''
+    passed_prompts = []
+    passed_completions = []
+
     failed_prompts = []
     failed_completions = []
 
@@ -320,7 +323,10 @@ def evaluate_rouge(model_name: str,
     count_rouge_passes = 0
     for i, rouge_score in enumerate(rouge_scores):
         if rouge_score > threshold:
-            count_rouge_passes += 1
+            # the p-c passed the threshold
+            count_rouge_passes += 1 # number of passes for graph visualization
+            passed_prompts.append(prompts[i])
+            passed_completions.append(predictions[i])
         else:
             # failed p-c to return
             failed_prompts.append(prompts[i])
@@ -329,4 +335,4 @@ def evaluate_rouge(model_name: str,
     time_taken = end_time - start_time
     print(f"All rouge scores computed for {model_name} in {time_taken} seconds")
 
-    return count_rouge_passes, failed_prompts, failed_completions, time_taken
+    return count_rouge_passes, passed_prompts, passed_prompts, failed_prompts, failed_completions, time_taken
