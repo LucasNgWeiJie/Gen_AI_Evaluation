@@ -257,7 +257,7 @@ def evaluate_all_rouge(data, is_finetuned: str, rouge_type: str, threshold: int)
 
     elif is_finetuned == "pretrained":
         for model in MODELS:
-            pretrained_rouge_score, failed_prompts, failed_completions, pretrained_time = evaluate_rouge(model, data, False, rouge_type, threshold)
+            pretrained_rouge_score, passed_prompts, passed_completions, failed_prompts, failed_completions, pretrained_time = evaluate_rouge(model, data, False, rouge_type, threshold)
             pretrained_rouge_scores.append(pretrained_rouge_score)
             pretrained_times.append(pretrained_time)
             print(f"-------------------------------------Writing outputs that failed rouge score{is_finetuned}_{model}-------------------------------------------")
@@ -332,9 +332,9 @@ def eval_suite(dataset_filename: str, is_finetuned: str):
     start_time = time.time()
     print(f"---------------Starting Model Evaluation-----------------------")
     data = open_dataset_file(dataset_filename, True)
-    # evaluate_all_perplexity_loss(data, is_finetuned)
-    # evaluate_time_completion(data, is_finetuned)
-    # evaluate_all_asserts(is_finetuned)
+    evaluate_all_perplexity_loss(data, is_finetuned)
+    evaluate_time_completion(data, is_finetuned)
+    evaluate_all_asserts(is_finetuned)
     evaluate_all_rouge(data, is_finetuned, 'rougeL', ROUGE_THRESHOLD) # 'rouge1', 'rouge2', 'rougeL', 'rougeLsum'
     end_time = time.time()
     total_time = end_time - start_time
