@@ -1,0 +1,202 @@
+[
+    {
+        "prompt": "What is the `update(byte[], short, short)` method of the `Signature.OneShot` class of the `javacard.security` package declared as?",
+        "completion": "The `update(byte[], short, short)` method of the `Signature.OneShot` class of the `javacard.security` package is declared `final`."
+    },
+    {
+        "prompt": " the `DNA_SCAN` field of the `Bio1toNBuilder` class of the `javacardx.biometry1toN` package.",
+        "completion": "The `DNA_SCAN` field of the `Bio1toNBuilder` class of the `javacardx.biometry1toN` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "What does the `makeTransientIntArray(short, byte)` method of the `JCint` class of the `javacardx.framework.util.intx` package serve to accomplish?",
+        "completion": "Creates a transient int array with the specified array length."
+    },
+    {
+        "prompt": "State the additional keywords assigned to the `CIPHER_RSA` field of the `Cipher` class of the `javacardx.crypto` package.",
+        "completion": "The `CIPHER_RSA` field of the `Cipher` class of the `javacardx.crypto` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "State the type of the `PAD_PKCS1_OAEP_SHA512` field of the `Cipher` class of the `javacardx.crypto` package.",
+        "completion": "The `PAD_PKCS1_OAEP_SHA512` field of the `Cipher` class of the `javacardx.crypto` package is of type `byte`."
+    },
+    {
+        "prompt": "What is the `SystemException` exception of the `javacard.framework` package intended for?",
+        "completion": "`SystemException` represents a `JCSystem` class related exception. It is also thrown by the `javacard.framework.Applet.register()` methods and by the `AID` class constructor.\n\nThese API classes throw Java Card runtime environment-owned instances of `SystemException`.\n\nJava Card runtime environment-owned instances of exception classes are temporary Java Card runtime environment Entry Point Objects and can be accessed from any applet context. References to these temporary objects cannot be stored in class variables or instance variables or array components. See Runtime Environment Specification, Java Card Platform, Classic Edition, section 6.2.1 for details."
+    },
+    {
+        "prompt": "Explain the role of the `FACIAL_FEATURE` field of the `Bio1toNBuilder` class of the `javacardx.biometry1toN` package.",
+        "completion": "Facial feature recognition (visage)."
+    },
+    {
+        "prompt": "What is the `BRAINPOOLP512R1` field of the `NamedParameterSpec` class of the `javacard.security` package declared as?",
+        "completion": "The `BRAINPOOLP512R1` field of the `NamedParameterSpec` class of the `javacard.security` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "What is the `put(int, byte)` method of the `ByteBuffer` class of the `javacardx.framework.nio` package declared as?",
+        "completion": "The `put(int, byte)` method of the `ByteBuffer` class of the `javacardx.framework.nio` package is declared `abstract`."
+    },
+    {
+        "prompt": "What is the objective of the `Object()` constructor of the `Object` class of the `java.lang` package?",
+        "completion": ""
+    },
+    {
+        "prompt": "What does the `getInfo()` method of the `KDFHmacSpec` interface of the `javacardx.security.derivation` package return?",
+        "completion": "The `getInfo()` method of the `KDFHmacSpec` interface of the `javacardx.security.derivation` package returns a `byte[]` - the salt"
+    },
+    {
+        "prompt": "What is the `arrayCopy(byte[], short, byte[], short, short)` method of the `Util` class of the `javacard.framework` package declared as?",
+        "completion": "The `arrayCopy(byte[], short, byte[], short, short)` method of the `Util` class of the `javacard.framework` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "State the additional keywords assigned to the `PROPERTY_OUTPUT_CONFIDENTIALITY` field of the `SecurityService` interface of the `javacard.framework.service` package.",
+        "completion": "The `PROPERTY_OUTPUT_CONFIDENTIALITY` field of the `SecurityService` interface of the `javacard.framework.service` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "What is the function of the `KeyAgreement` class of the `javacard.security` package?",
+        "completion": "The `KeyAgreement` class is the base class for key agreement algorithms such as Diffie-Hellman and EC Diffie-Hellman [IEEE P1363]. Implementations of `KeyAgreement` algorithms must extend this class and implement all the abstract methods. A tear or card reset event resets an initialized `KeyAgreement` object to the state it was in when previously initialized via a call to `init()`."
+    },
+    {
+        "prompt": "State the significance of the `UTF_16_LE` field of the `StringUtil` class of the `javacardx.framework.string` package.",
+        "completion": "The UTF-16LE (Little Endian) character encoding. This character encoding may be optionally supported for conversion to and from UTF-8 when doing input or output."
+    },
+    {
+        "prompt": " the `ALG_KEYGENERATION` field of the `RandomData` class of the `javacard.security` package.",
+        "completion": "The `ALG_KEYGENERATION` field of the `RandomData` class of the `javacard.security` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "What is the objective of the `ALG_DES_MAC4_ISO9797_1_M1_ALG3` field of the `Signature` class of the `javacard.security` package?",
+        "completion": "Signature algorithm `ALG_DES_MAC4_ISO9797_1_M1_ALG3` generates a 4-byte MAC using triple DES with a 2-key DES3 key according to ISO9797-1 MAC algorithm 3 with method 1, where input data is padded using method 1 and the data is processed as described in MAC Algorithm 3 of the ISO 9797-1 specification. The left key block of the triple DES key is used as a single DES key(K) and the right key block of the triple DES key is used as a single DES Key (K') during MAC processing. The final result is truncated to 4 bytes as described in ISO9797-1.\n\nTo request this algorithm using the `getInstance(byte, byte, byte, boolean)` method use the `MessageDigest.ALG_NULL`, `SIG_CIPHER_DES_MAC4`, `Cipher.PAD_ISO9797_1_M1_ALG3` constants respectively.\n\nNote:\n- This algorithm is a triple DES algorithm and requires a 16 byte key (2-key DES3 key)"
+    },
+    {
+        "prompt": "State all possible exceptions thrown by the `appendValue(byte[], short, byte[], short, short)` method of the `PrimitiveBERTLV` class of the `javacardx.framework.tlv` package and why they are thrown.",
+        "completion": "The `appendValue(byte[], short, byte[], short, short)` method of the `PrimitiveBERTLV` class of the `javacardx.framework.tlv` package throws the following exceptions:\n- `TLVException` with the following reason codes:\n- `TLVException.TLV_SIZE_GREATER_THAN_32767` if the size of the resulting Primitive BER TLV is > 32767.\n- `TLVException.MALFORMED_TLV` if the TLV representation in the input byte array is not a well-formed primitive BER TLV structure"
+    },
+    {
+        "prompt": "State all possible exceptions thrown by the `init(byte[], short, short)` method of the `ConstructedBERTLV` class of the `javacardx.framework.tlv` package and why they are thrown.",
+        "completion": "The `init(byte[], short, short)` method of the `ConstructedBERTLV` class of the `javacardx.framework.tlv` package throws the following exceptions:\n- `TLVException` with the following reason codes:\n- `TLVException.ILLEGAL_SIZE` if the required capacity is not available and the implementation does not support automatic expansion.\n- `TLVException.MALFORMED_TLV` if the input data is not a well-formed constructed BER TLV structure."
+    },
+    {
+        "prompt": "State the parameters that the `retrieveTag(byte[], short, short)` method of the `AEADCipher` class of the `javacardx.crypto` package requires, and their purposes.",
+        "completion": "The `retrieveTag(byte[], short, short)` method of the `AEADCipher` class of the `javacardx.crypto` package has the following parameters:\n- `byte[] tagBuf` - the buffer that will contain the authentication tag\n- `short tagOff` - the offset of the authentication tag in the buffer\n- `short tagLen` - the length in bytes of the authentication tag in the buffer"
+    },
+    {
+        "prompt": "State the purpose of the `allocateDirect(int)` method of the `ByteBuffer` class of the `javacardx.framework.nio` package.",
+        "completion": "Allocates a new direct byte buffer.\n\nThe new buffer's position will be zero, its limit will be its capacity, each of its elements will be initialized to zero, and its byte order will be `BIG_ENDIAN`. Whether or not it has a `backing array` is unspecified."
+    },
+    {
+        "prompt": "State the additional keywords assigned to the `makeShort(byte, byte)` method of the `Util` class of the `javacard.framework` package.",
+        "completion": "The `makeShort(byte, byte)` method of the `Util` class of the `javacard.framework` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "State the parameters that the `arrayFindGeneric(Object, short, byte[], short)` method of the `ArrayLogic` class of the `javacardx.framework.util` package requires, and their purposes.",
+        "completion": "The `arrayFindGeneric(Object, short, byte[], short)` method of the `ArrayLogic` class of the `javacardx.framework.util` package has the following parameters:\n- `Object theArray` - the array object to search\n- `short off` - offset within the array to start serching for the specified value\n- `byte[] valArray` - the array object containing the search value\n- `short valOff` - the offset within the `valArray` array containing the search value"
+    },
+    {
+        "prompt": "What exceptions are thrown by the `multiply(byte[], short, short, byte)` method of the `BigNumber` class of the `javacardx.framework.math` package, and when do they occur?",
+        "completion": "The `multiply(byte[], short, short, byte)` method of the `BigNumber` class of the `javacardx.framework.math` package throws the following exceptions:\n- `ArithmeticException` for the following conditions:\n- if the input byte array format is not conformant with the specified `arrayFormat` parameter\n- if the result of the multiplication results in a big number which cannot be represented within the maximum supported bytes or is greater than the configured max value. The internal big number is left unchanged.\n- if `bLen` is 0\n- if `arrayFormat` is not one of the FORMAT_ constants."
+    },
+    {
+        "prompt": " the `LENGTH_RSA_3072` field of the `KeyBuilder` class of the `javacard.security` package.",
+        "completion": "The `LENGTH_RSA_3072` field of the `KeyBuilder` class of the `javacard.security` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "State the purpose of the `getTriesRemaining()` method of the `BioTemplate` interface of the `javacardx.biometry` package.",
+        "completion": "Returns the number of times remaining that an incorrect candidate template can be presented before the reference template is blocked.\n\nIn addition to returning a `byte` result, platform-implementations of this method set the result in an internal state which can be rechecked using assertion methods of the `SensitiveResult` class, if supported by the platform."
+    },
+    {
+        "prompt": "What is the `getA(byte[], short)` method of the `ECKey` interface of the `javacard.security` package intended for?",
+        "completion": "Returns the first coefficient of the curve of the key. For keys of type `TYPE_EC_FP_PRIVATE` or `TYPE_EC_FP_PUBLIC`, this is the value of A as an integer modulo the field specification parameter p, that is, an integer in the range `0` to p-1. For keys of type `TYPE_EC_F2M_PRIVATE` or `TYPE_EC_F2M_PUBLIC`, the bit representation of this value specifies a polynomial with binary coefficients which represents the value of A in the field. The plain text data format is big-endian and right-aligned (the least significant bit is the least significant bit of last byte)."
+    },
+    {
+        "prompt": "What is returned from the `getAttributes(Object)` method of the `JCSystem` class of the `javacard.framework` package when called?",
+        "completion": "The `getAttributes(Object)` method of the `JCSystem` class of the `javacard.framework` package returns a `short` - the attributes ( `ATTR_READABLE_VIEW`, `ATTR_WRITABLE_VIEW` ) of the view"
+    },
+    {
+        "prompt": "State the additional keywords assigned to the `CIPHER_KOREAN_SEED_ECB` field of the `Cipher` class of the `javacardx.crypto` package.",
+        "completion": "The `CIPHER_KOREAN_SEED_ECB` field of the `Cipher` class of the `javacardx.crypto` package is declared `static`, `final`."
+    },
+    {
+        "prompt": " the `rewind()` method of the `Buffer` class of the `javacardx.framework.nio` package.",
+        "completion": "The `rewind()` method of the `Buffer` class of the `javacardx.framework.nio` package is declared `final`."
+    },
+    {
+        "prompt": "What is the `FIELD_TBS_NOT_AFTER` field of the `X509Certificate` interface of the `javacardx.security.cert` package declared as?",
+        "completion": "The `FIELD_TBS_NOT_AFTER` field of the `X509Certificate` interface of the `javacardx.security.cert` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "What does the `dispatch(APDU, byte)` method of the `Dispatcher` class of the `javacard.framework.service` package return?",
+        "completion": "The `dispatch(APDU, byte)` method of the `Dispatcher` class of the `javacard.framework.service` package returns a `Exception` - an exception that occurred during the processing of the command, or `null` if the command could not be processed"
+    },
+    {
+        "prompt": "What is the `OwnerPIN` class of the `javacard.framework` package used for?",
+        "completion": "This class represents an Owner PIN, implements Personal Identification Number functionality as defined in the `PIN` interface, and provides the ability to update the PIN and thus owner functionality.\n\nThe implementation of this class must protect against attacks based on program flow prediction. In addition, even if a transaction is in progress, update of internal state, such as the try counter, the validated flag, and the blocking state, shall not participate in the transaction during PIN presentation.\n\nIf an implementation of this class creates transient arrays, it must ensure that they are `CLEAR_ON_RESET` transient objects.\n\nThe protected methods `getValidatedFlag` and `setValidatedFlag` allow a subclass of this class to optimize the storage for the validated boolean state.\n\nSome methods of instances of this class are only suitable for sharing when there exists a trust relationship among the applets. A typical shared usage would use a proxy PIN interface which extends both the `PIN` interface and the `Shareable` interface and re-declares the methods of the PIN interface.\n\nAny of the methods of the `OwnerPIN` may be called with a transaction in progress. None of the methods of `OwnerPIN` class initiate or alter the state of the transaction if one is in progress."
+    },
+    {
+        "prompt": "What arguments are provided to the `init(ConstructedBERTag, BERTLV)` method of the `ConstructedBERTLV` class of the `javacardx.framework.tlv` package, and what are they for?",
+        "completion": "The `init(ConstructedBERTag, BERTLV)` method of the `ConstructedBERTLV` class of the `javacardx.framework.tlv` package has the following parameters:\n- `ConstructedBERTag tag` - a `BERTag` object\n- `BERTLV aTLV` - to use to initialize as the value of `this` TLV"
+    },
+    {
+        "prompt": "Of what type is the `TYPE_EC_FP_PUBLIC` field of the `KeyBuilder` class of the `javacard.security` package?",
+        "completion": "The `TYPE_EC_FP_PUBLIC` field of the `KeyBuilder` class of the `javacard.security` package is of type `byte`."
+    },
+    {
+        "prompt": "What does the `ALG_NULL` field of the `MessageDigest` class of the `javacard.security` package help to achieve?",
+        "completion": "This constant indicates that there is no discrete message digest algorithm. It is intended for use in the `Signature.getInstance(byte, byte, byte, boolean)` method.\n\nIf this constant in used in the `getInstance(byte, boolean)` it results in a CryptoException."
+    },
+    {
+        "prompt": "What does the `getCipherAlgorithm()` method of the `Signature` class of the `javacard.security` package return?",
+        "completion": "The `getCipherAlgorithm()` method of the `Signature` class of the `javacard.security` package returns a `byte` - the cipher algorithm code defined above; if the algorithm is not one of the pre-defined algorithms, `0` is returned."
+    },
+    {
+        "prompt": "Explain the possible exceptions raised by the `getInstance(short)` method of the `NamedParameterSpec` class of the `javacard.security` package and when they happen.",
+        "completion": "The `getInstance(short)` method of the `NamedParameterSpec` class of the `javacard.security` package throws the following exceptions:\n- `CryptoException` with the following reason codes:\n- `CryptoException.NO_SUCH_ALGORITHM` if the requested parameters are not supported."
+    },
+    {
+        "prompt": "State the type of the `ALG_DES_CBC_PKCS5` field of the `Cipher` class of the `javacardx.crypto` package.",
+        "completion": "The `ALG_DES_CBC_PKCS5` field of the `Cipher` class of the `javacardx.crypto` package is of type `byte`."
+    },
+    {
+        "prompt": "State the interface the `RSAPrivateCrtKey` interface of the `javacard.security` package is an extension of.",
+        "completion": "The `RSAPrivateCrtKey` interface of the `javacard.security` package extends `PrivateKey`."
+    },
+    {
+        "prompt": "What is the objective of the `init(byte[], short, short)` method of the `OwnerBioTemplateData` interface of the `javacardx.biometry1toN` package?",
+        "completion": "Initializes the enrollment of biometric template data. This method is also used to update biometric template data and will restart an initialization sequence.\n\nNotes:\n- A call to this method does not complete the initialization. A correct enrollment sequence is : `init`, [ `update`,] `doFinal`. Calling `init` and `doFinal` is mandatory, calling `update` is optional. A call to `BioTemplateData.isInitialized()` will return `true` only if the enrollment sequence is completed.\n- The template format verification may occur during any step of the enrollment sequence or may only be performed when fully received in `doFinal` call."
+    },
+    {
+        "prompt": "What arguments are provided to the `unexport(Remote)` method of the `CardRemoteObject` class of the `javacard.framework.service` package, and what are they for?",
+        "completion": "The `unexport(Remote)` method of the `CardRemoteObject` class of the `javacard.framework.service` package has the following parameters:\n- `Remote obj` - the remotely accessible object"
+    },
+    {
+        "prompt": "What is the `readData(byte[], short, byte[], short, short, short, short, short)` method of the `MemoryAccess` interface of the `javacardx.external` package used for?",
+        "completion": "This method is used to read data from non-directly addressable memory after providing the correct key(password) to authenticate.\n\nIf the authentication fails or reads are disallowed at the specified memory subsystem location(s), this method returns `0`."
+    },
+    {
+        "prompt": "What does the `processDataOut(APDU)` method of the `Service` interface of the `javacard.framework.service` package return?",
+        "completion": "The `processDataOut(APDU)` method of the `Service` interface of the `javacard.framework.service` package returns a `boolean` - `true` if output processing is finished, `false` otherwise"
+    },
+    {
+        "prompt": " the `ByteOrder` class of the `javacardx.framework.nio` package.",
+        "completion": "The `ByteOrder` class of the `javacardx.framework.nio` package is declared `final`."
+    },
+    {
+        "prompt": "What is the objective of the `BER_TAG_TYPE_CONSTRUCTED` field of the `BERTag` class of the `javacardx.framework.tlv` package?",
+        "completion": "Constant for constructed BER Tag type"
+    },
+    {
+        "prompt": "State the purpose of the `getField(byte[], short)` method of the `ECKey` interface of the `javacard.security` package.",
+        "completion": "Returns the field specification parameter value of the key. For keys of type `TYPE_EC_FP_PRIVATE` or `TYPE_EC_FP_PUBLIC`, this is the value of the prime p corresponding to the field GF(p). For keys of type `TYPE_EC_F2M_PRIVATE` or `TYPE_EC_F2M_PUBLIC`, it is the value whose bit representation specifies the polynomial with binary coefficients used to define the arithmetic operations in the field GF(2^n) The plain text data format is big-endian and right-aligned (the least significant bit is the least significant bit of last byte)."
+    },
+    {
+        "prompt": "State the additional keywords assigned to the `ALG_KDF_FEEDBACK_MODE` field of the `DerivationFunction` class of the `javacardx.security.derivation` package.",
+        "completion": "The `ALG_KDF_FEEDBACK_MODE` field of the `DerivationFunction` class of the `javacardx.security.derivation` package is declared `static`, `final`."
+    },
+    {
+        "prompt": "State what the `onExtension(byte[], boolean, byte[])` method of the `X509Certificate.ExtensionHandler` interface of the `javacardx.security.cert` package returns.",
+        "completion": "The `onExtension(byte[], boolean, byte[])` method of the `X509Certificate.ExtensionHandler` interface of the `javacardx.security.cert` package returns a `boolean` - `true` to inform the parser to keep the certificate extension to be able to use it to initialize a new Certificate instance"
+    },
+    {
+        "prompt": "Explain the possible exceptions raised by the `init(Key, byte)` method of the `Cipher.OneShot` class of the `javacardx.crypto` package and when they happen.",
+        "completion": "The `init(Key, byte)` method of the `Cipher.OneShot` class of the `javacardx.crypto` package throws the following exceptions:\n- `CryptoException` with the following reason codes:\n- `CryptoException.ILLEGAL_VALUE` if `theMode` option is an undefined value or if the `Key` is inconsistent with the `Cipher` implementation.\n- `CryptoException.UNINITIALIZED_KEY` if `theKey` instance is uninitialized."
+    }
+]

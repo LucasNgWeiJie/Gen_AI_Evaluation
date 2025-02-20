@@ -28,9 +28,9 @@ def evaluate_loss_perplexity(model_name: str,
     # for time recording purposes
     start_time = time.time()
     if is_finetuned:
-        print(f"Evaluatating loss and perplexity of finetuned {model_name}.........")
+        print(f"Evaluating loss and perplexity of finetuned {model_name}.........")
     else:
-        print(f"Evaluatating loss and perplexity of pretrained {model_name}.........")
+        print(f"Evaluating loss and perplexity of pretrained {model_name}.........")
     torch.cuda.empty_cache()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # load model
@@ -47,9 +47,8 @@ def evaluate_loss_perplexity(model_name: str,
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
     load_model_end_time = time.perf_counter()
-    print(f"{model_name} takes {load_model_end_time - load_model_start_time} to load")
 
-    print(f"{model_name} loaded in {load_model_end_time - load_model_start_time}")
+    print(f"{model_name} loaded in {load_model_end_time - load_model_start_time} seconds")
     evl_model.eval()
     total_loss = 0
     total_tokens = 0
@@ -176,13 +175,15 @@ def create_completion_dataset(model_name: str,
 
         # Generate output
         output_tokens = evl_model.generate(
-            **inputs,
+            **inputs,  # Ensure you pass the tokenized inputs
             pad_token_id=tokenizer.pad_token_id,
-            max_length=2048,
-            temperature=0.5,
-            top_p=0.9,
-            top_k=50,
-            do_sample=True
+            max_length=1024,  # Shortened to avoid too long sequences
+            temperature=0.7,  # Balanced for focused but diverse output
+            top_p=0.85,  # Broad enough for diversity
+            top_k=40,  # Limit to top 40 tokens for selection
+            do_sample=True,  # Enable sampling for more diverse outputs
+            repetition_penalty=1.2,  # Reduce repetitive text
+            no_repeat_ngram_size=2  # Prevent repeating n-grams
         )
         
         # Count completion tokens
@@ -208,7 +209,8 @@ def count_correct_assert_statements(model_name: str,
                                     prefix_file_name: str,
                                     assert_file_name: str):
     '''
-    This function calculates the total number of assert statements
+    This function calcuate the number of word matches between the model's output 
+    and the reference dataset in the assert_file
     '''
     if is_finetuned:
         print(f"Evaluating asserts for finetuned {model_name}")
@@ -261,7 +263,8 @@ def count_correct_assert_statements(model_name: str,
                                      skip_special_tokens=True)
         for exp in test["test"]:
             if re.search(exp, completed):
-                count_correct += 1
+                count_correct += 1 # count_correct is tracking how many of the expected patterns (from test["test"]) were found in the completed string.
+                
     end_time = time.time()
     time_taken = end_time - start_time
     print(f"Assert statements counted for {model_name} in {time_taken} seconds")
@@ -296,7 +299,7 @@ def evaluate_rouge(model_name: str,
     prompts = [p["prompt"] for p in dataset] # used to output the corresponding failed p-c 
     references = [r["completion"] for r in dataset]
     
-    # opens file, location is different between finetuned and pretrained
+    # opens model output as prediction to compare with reference dataset
     if is_finetuned:
         finetuned_model_path = (
             f"./model_output/finetuned_{model_name.split('/', maxsplit=-1)[0]}.json"

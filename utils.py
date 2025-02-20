@@ -32,7 +32,7 @@ def open_dataset_file(dataset_file: str, to_print: bool):
     else:
         data = dataset_file
     if to_print:
-        print(f"{dataset_file} has {data.num_rows} of prompt-completion pairs")
+        print(f"{dataset_file} has {data.num_rows} prompt-completions")
     return data
 
 def evaluate_all_perplexity_loss(data, is_finetuned: str):
