@@ -305,9 +305,9 @@ def evaluate_all_rouge(data, is_finetuned: str, rouge_type: str, threshold: int)
             failed_outputs_ft = [{"prompt": prompt, "completion": completion} for prompt, completion in zip(failed_prompts_ft, failed_completions_ft)]
             # Write the data to a JSON file
             with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougepassed_{model.split("/")[0]}.json', 'w') as json_file:
-                json.dump(passed_outputs, json_file, indent=4)
+                json.dump(passed_outputs_ft, json_file, indent=4)
             with open(ROUGE_OUTPUT_PREFIX + f'finetuned_rougefailed_{model.split("/")[0]}.json', 'w') as json_file:
-                json.dump(failed_outputs, json_file, indent=4)           
+                json.dump(failed_outputs_ft, json_file, indent=4)           
 
         # plot both
         print(f"Rouge calculation done\n Plotting graphs for all Rouge scores...")
