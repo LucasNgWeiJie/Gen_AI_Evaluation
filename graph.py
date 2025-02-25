@@ -7,7 +7,7 @@ import numpy as np
 
 def plot_metrics_line(model_names, losses, perplexities, output_file):
     '''
-    This function plots a beautified line graph
+    This function plots a line graph
     '''
     # Apply a clean Seaborn theme
     sns.set_style("whitegrid")

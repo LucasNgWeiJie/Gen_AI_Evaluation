@@ -9,6 +9,7 @@ from peft import AutoPeftModelForCausalLM, LoraConfig
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           BitsAndBytesConfig)
 from trl import SFTTrainer, setup_chat_format, SFTConfig
+from evaluation import time_execution
 
 class ModelTrainer:
     def __init__(self, model_name: str, dataset_name: str, prefix_file_name: str = 'finetuned'):
